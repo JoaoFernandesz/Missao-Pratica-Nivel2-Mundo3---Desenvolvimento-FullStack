@@ -1,0 +1,998 @@
+
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Desenvolvimento FullStack - Missão Prática Nivel2 Mundo3 - João Victor Macedo Fernandes Ramos</title><style>
+    /* cspell:disable-file */
+    /* webkit printing magic: print all background colors */
+    html {
+        -webkit-print-color-adjust: exact;
+    }
+    * {
+        box-sizing: border-box;
+        -webkit-print-color-adjust: exact;
+    }
+    
+    html,
+    body {
+        margin: 0;
+        padding: 0;
+    }
+    @media only screen {
+        body {
+            margin: 2em auto;
+            max-width: 900px;
+            color: rgb(55, 53, 47);
+        }
+    }
+    
+    body {
+        line-height: 1.5;
+        white-space: pre-wrap;
+    }
+    
+    a,
+    a.visited {
+        color: inherit;
+        text-decoration: underline;
+    }
+    
+    .pdf-relative-link-path {
+        font-size: 80%;
+        color: #444;
+    }
+    
+    h1,
+    h2,
+    h3 {
+        letter-spacing: -0.01em;
+        line-height: 1.2;
+        font-weight: 600;
+        margin-bottom: 0;
+    }
+    
+    .page-title {
+        font-size: 2.5rem;
+        font-weight: 700;
+        margin-top: 0;
+        margin-bottom: 0.75em;
+    }
+    
+    h1 {
+        font-size: 1.875rem;
+        margin-top: 1.875rem;
+    }
+    
+    h2 {
+        font-size: 1.5rem;
+        margin-top: 1.5rem;
+    }
+    
+    h3 {
+        font-size: 1.25rem;
+        margin-top: 1.25rem;
+    }
+    
+    .source {
+        border: 1px solid #ddd;
+        border-radius: 3px;
+        padding: 1.5em;
+        word-break: break-all;
+    }
+    
+    .callout {
+        border-radius: 3px;
+        padding: 1rem;
+    }
+    
+    figure {
+        margin: 1.25em 0;
+        page-break-inside: avoid;
+    }
+    
+    figcaption {
+        opacity: 0.5;
+        font-size: 85%;
+        margin-top: 0.5em;
+    }
+    
+    mark {
+        background-color: transparent;
+    }
+    
+    .indented {
+        padding-left: 1.5em;
+    }
+    
+    hr {
+        background: transparent;
+        display: block;
+        width: 100%;
+        height: 1px;
+        visibility: visible;
+        border: none;
+        border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+    }
+    
+    img {
+        max-width: 100%;
+    }
+    
+    @media only print {
+        img {
+            max-height: 100vh;
+            object-fit: contain;
+        }
+    }
+    
+    @page {
+        margin: 1in;
+    }
+    
+    .collection-content {
+        font-size: 0.875rem;
+    }
+    
+    .column-list {
+        display: flex;
+        justify-content: space-between;
+    }
+    
+    .column {
+        padding: 0 1em;
+    }
+    
+    .column:first-child {
+        padding-left: 0;
+    }
+    
+    .column:last-child {
+        padding-right: 0;
+    }
+    
+    .table_of_contents-item {
+        display: block;
+        font-size: 0.875rem;
+        line-height: 1.3;
+        padding: 0.125rem;
+    }
+    
+    .table_of_contents-indent-1 {
+        margin-left: 1.5rem;
+    }
+    
+    .table_of_contents-indent-2 {
+        margin-left: 3rem;
+    }
+    
+    .table_of_contents-indent-3 {
+        margin-left: 4.5rem;
+    }
+    
+    .table_of_contents-link {
+        text-decoration: none;
+        opacity: 0.7;
+        border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+    }
+    
+    table,
+    th,
+    td {
+        border: 1px solid rgba(55, 53, 47, 0.09);
+        border-collapse: collapse;
+    }
+    
+    table {
+        border-left: none;
+        border-right: none;
+    }
+    
+    th,
+    td {
+        font-weight: normal;
+        padding: 0.25em 0.5em;
+        line-height: 1.5;
+        min-height: 1.5em;
+        text-align: left;
+    }
+    
+    th {
+        color: rgba(55, 53, 47, 0.6);
+    }
+    
+    ol,
+    ul {
+        margin: 0;
+        margin-block-start: 0.6em;
+        margin-block-end: 0.6em;
+    }
+    
+    li > ol:first-child,
+    li > ul:first-child {
+        margin-block-start: 0.6em;
+    }
+    
+    ul > li {
+        list-style: disc;
+    }
+    
+    ul.to-do-list {
+        padding-inline-start: 0;
+    }
+    
+    ul.to-do-list > li {
+        list-style: none;
+    }
+    
+    .to-do-children-checked {
+        text-decoration: line-through;
+        opacity: 0.375;
+    }
+    
+    ul.toggle > li {
+        list-style: none;
+    }
+    
+    ul {
+        padding-inline-start: 1.7em;
+    }
+    
+    ul > li {
+        padding-left: 0.1em;
+    }
+    
+    ol {
+        padding-inline-start: 1.6em;
+    }
+    
+    ol > li {
+        padding-left: 0.2em;
+    }
+    
+    .mono ol {
+        padding-inline-start: 2em;
+    }
+    
+    .mono ol > li {
+        text-indent: -0.4em;
+    }
+    
+    .toggle {
+        padding-inline-start: 0em;
+        list-style-type: none;
+    }
+    
+    /* Indent toggle children */
+    .toggle > li > details {
+        padding-left: 1.7em;
+    }
+    
+    .toggle > li > details > summary {
+        margin-left: -1.1em;
+    }
+    
+    .selected-value {
+        display: inline-block;
+        padding: 0 0.5em;
+        background: rgba(206, 205, 202, 0.5);
+        border-radius: 3px;
+        margin-right: 0.5em;
+        margin-top: 0.3em;
+        margin-bottom: 0.3em;
+        white-space: nowrap;
+    }
+    
+    .collection-title {
+        display: inline-block;
+        margin-right: 1em;
+    }
+    
+    .page-description {
+        margin-bottom: 2em;
+    }
+    
+    .simple-table {
+        margin-top: 1em;
+        font-size: 0.875rem;
+        empty-cells: show;
+    }
+    .simple-table td {
+        height: 29px;
+        min-width: 120px;
+    }
+    
+    .simple-table th {
+        height: 29px;
+        min-width: 120px;
+    }
+    
+    .simple-table-header-color {
+        background: rgb(247, 246, 243);
+        color: black;
+    }
+    .simple-table-header {
+        font-weight: 500;
+    }
+    
+    time {
+        opacity: 0.5;
+    }
+    
+    .icon {
+        display: inline-block;
+        max-width: 1.2em;
+        max-height: 1.2em;
+        text-decoration: none;
+        vertical-align: text-bottom;
+        margin-right: 0.5em;
+    }
+    
+    img.icon {
+        border-radius: 3px;
+    }
+    
+    .user-icon {
+        width: 1.5em;
+        height: 1.5em;
+        border-radius: 100%;
+        margin-right: 0.5rem;
+    }
+    
+    .user-icon-inner {
+        font-size: 0.8em;
+    }
+    
+    .text-icon {
+        border: 1px solid #000;
+        text-align: center;
+    }
+    
+    .page-cover-image {
+        display: block;
+        object-fit: cover;
+        width: 100%;
+        max-height: 30vh;
+    }
+    
+    .page-header-icon {
+        font-size: 3rem;
+        margin-bottom: 1rem;
+    }
+    
+    .page-header-icon-with-cover {
+        margin-top: -0.72em;
+        margin-left: 0.07em;
+    }
+    
+    .page-header-icon img {
+        border-radius: 3px;
+    }
+    
+    .link-to-page {
+        margin: 1em 0;
+        padding: 0;
+        border: none;
+        font-weight: 500;
+    }
+    
+    p > .user {
+        opacity: 0.5;
+    }
+    
+    td > .user,
+    td > time {
+        white-space: nowrap;
+    }
+    
+    input[type="checkbox"] {
+        transform: scale(1.5);
+        margin-right: 0.6em;
+        vertical-align: middle;
+    }
+    
+    p {
+        margin-top: 0.5em;
+        margin-bottom: 0.5em;
+    }
+    
+    .image {
+        border: none;
+        margin: 1.5em 0;
+        padding: 0;
+        border-radius: 0;
+        text-align: center;
+    }
+    
+    .code,
+    code {
+        background: rgba(135, 131, 120, 0.15);
+        border-radius: 3px;
+        padding: 0.2em 0.4em;
+        border-radius: 3px;
+        font-size: 85%;
+        tab-size: 2;
+    }
+    
+    code {
+        color: #eb5757;
+    }
+    
+    .code {
+        padding: 1.5em 1em;
+    }
+    
+    .code-wrap {
+        white-space: pre-wrap;
+        word-break: break-all;
+    }
+    
+    .code > code {
+        background: none;
+        padding: 0;
+        font-size: 100%;
+        color: inherit;
+    }
+    
+    blockquote {
+        font-size: 1.25em;
+        margin: 1em 0;
+        padding-left: 1em;
+        border-left: 3px solid rgb(55, 53, 47);
+    }
+    
+    .bookmark {
+        text-decoration: none;
+        max-height: 8em;
+        padding: 0;
+        display: flex;
+        width: 100%;
+        align-items: stretch;
+    }
+    
+    .bookmark-title {
+        font-size: 0.85em;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        height: 1.75em;
+        white-space: nowrap;
+    }
+    
+    .bookmark-text {
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .bookmark-info {
+        flex: 4 1 180px;
+        padding: 12px 14px 14px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+    
+    .bookmark-image {
+        width: 33%;
+        flex: 1 1 180px;
+        display: block;
+        position: relative;
+        object-fit: cover;
+        border-radius: 1px;
+    }
+    
+    .bookmark-description {
+        color: rgba(55, 53, 47, 0.6);
+        font-size: 0.75em;
+        overflow: hidden;
+        max-height: 4.5em;
+        word-break: break-word;
+    }
+    
+    .bookmark-href {
+        font-size: 0.75em;
+        margin-top: 0.25em;
+    }
+    
+    .sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+    .code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+    .serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+    .mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+    .pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+    .pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+    .pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+    .pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+    .pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+    .pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+    .pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+    .pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+    .pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+    .pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+    .pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+    .pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+    .pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+    .pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+    .pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+    .pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+    .highlight-default {
+        color: rgba(55, 53, 47, 1);
+    }
+    .highlight-gray {
+        color: rgba(120, 119, 116, 1);
+        fill: rgba(120, 119, 116, 1);
+    }
+    .highlight-brown {
+        color: rgba(159, 107, 83, 1);
+        fill: rgba(159, 107, 83, 1);
+    }
+    .highlight-orange {
+        color: rgba(217, 115, 13, 1);
+        fill: rgba(217, 115, 13, 1);
+    }
+    .highlight-yellow {
+        color: rgba(203, 145, 47, 1);
+        fill: rgba(203, 145, 47, 1);
+    }
+    .highlight-teal {
+        color: rgba(68, 131, 97, 1);
+        fill: rgba(68, 131, 97, 1);
+    }
+    .highlight-blue {
+        color: rgba(51, 126, 169, 1);
+        fill: rgba(51, 126, 169, 1);
+    }
+    .highlight-purple {
+        color: rgba(144, 101, 176, 1);
+        fill: rgba(144, 101, 176, 1);
+    }
+    .highlight-pink {
+        color: rgba(193, 76, 138, 1);
+        fill: rgba(193, 76, 138, 1);
+    }
+    .highlight-red {
+        color: rgba(212, 76, 71, 1);
+        fill: rgba(212, 76, 71, 1);
+    }
+    .highlight-gray_background {
+        background: rgba(241, 241, 239, 1);
+    }
+    .highlight-brown_background {
+        background: rgba(244, 238, 238, 1);
+    }
+    .highlight-orange_background {
+        background: rgba(251, 236, 221, 1);
+    }
+    .highlight-yellow_background {
+        background: rgba(251, 243, 219, 1);
+    }
+    .highlight-teal_background {
+        background: rgba(237, 243, 236, 1);
+    }
+    .highlight-blue_background {
+        background: rgba(231, 243, 248, 1);
+    }
+    .highlight-purple_background {
+        background: rgba(244, 240, 247, 0.8);
+    }
+    .highlight-pink_background {
+        background: rgba(249, 238, 243, 0.8);
+    }
+    .highlight-red_background {
+        background: rgba(253, 235, 236, 1);
+    }
+    .block-color-default {
+        color: inherit;
+        fill: inherit;
+    }
+    .block-color-gray {
+        color: rgba(120, 119, 116, 1);
+        fill: rgba(120, 119, 116, 1);
+    }
+    .block-color-brown {
+        color: rgba(159, 107, 83, 1);
+        fill: rgba(159, 107, 83, 1);
+    }
+    .block-color-orange {
+        color: rgba(217, 115, 13, 1);
+        fill: rgba(217, 115, 13, 1);
+    }
+    .block-color-yellow {
+        color: rgba(203, 145, 47, 1);
+        fill: rgba(203, 145, 47, 1);
+    }
+    .block-color-teal {
+        color: rgba(68, 131, 97, 1);
+        fill: rgba(68, 131, 97, 1);
+    }
+    .block-color-blue {
+        color: rgba(51, 126, 169, 1);
+        fill: rgba(51, 126, 169, 1);
+    }
+    .block-color-purple {
+        color: rgba(144, 101, 176, 1);
+        fill: rgba(144, 101, 176, 1);
+    }
+    .block-color-pink {
+        color: rgba(193, 76, 138, 1);
+        fill: rgba(193, 76, 138, 1);
+    }
+    .block-color-red {
+        color: rgba(212, 76, 71, 1);
+        fill: rgba(212, 76, 71, 1);
+    }
+    .block-color-gray_background {
+        background: rgba(241, 241, 239, 1);
+    }
+    .block-color-brown_background {
+        background: rgba(244, 238, 238, 1);
+    }
+    .block-color-orange_background {
+        background: rgba(251, 236, 221, 1);
+    }
+    .block-color-yellow_background {
+        background: rgba(251, 243, 219, 1);
+    }
+    .block-color-teal_background {
+        background: rgba(237, 243, 236, 1);
+    }
+    .block-color-blue_background {
+        background: rgba(231, 243, 248, 1);
+    }
+    .block-color-purple_background {
+        background: rgba(244, 240, 247, 0.8);
+    }
+    .block-color-pink_background {
+        background: rgba(249, 238, 243, 0.8);
+    }
+    .block-color-red_background {
+        background: rgba(253, 235, 236, 1);
+    }
+    .select-value-color-uiBlue { background-color: rgba(35, 131, 226, .07); }
+    .select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+    .select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+    .select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+    .select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+    .select-value-color-transparentGray { background-color: rgba(227, 226, 224, 0); }
+    .select-value-color-translucentGray { background-color: rgba(255, 255, 255, 0.0375); }
+    .select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+    .select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+    .select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+    .select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+    .select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+    .select-value-color-pageGlass { background-color: undefined; }
+    .select-value-color-washGlass { background-color: undefined; }
+    
+    .checkbox {
+        display: inline-flex;
+        vertical-align: text-bottom;
+        width: 16;
+        height: 16;
+        background-size: 16px;
+        margin-left: 2px;
+        margin-right: 5px;
+    }
+    
+    .checkbox-on {
+        background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+    }
+    
+    .checkbox-off {
+        background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+    }
+        
+    </style></head><body><article id="182a8036-e2c2-4cf8-b3fe-e8b04d1aebaf" class="page sans"><header><h1 style="text-align: center;" class="page-title">Desenvolvimento FullStack <br> Missão Prática Nivel2 Mundo3 <br> João Victor Macedo Fernandes Ramos</h1><p class="page-description"></p></header><div class="page-body"><figure id="e7d08879-bca8-44a5-84cf-f99d90c194db" class="image"><a target="_blank" href="Relatorio/img/logo_estacio.svg"><img style="width:231.98863220214844px" src="Relatorio/img/logo_estacio.svg"/></a></figure><h1 id="67d761e9-21e4-405e-80be-e13be973b650" class=""><strong>Informações</strong></h1><h3 id="3ae4152b-922b-4902-911a-93e0365cc940" class=""><strong>Curso</strong></h3><ul id="09bf3550-e09e-4234-ae3f-a49034cbd4b2" class="bulleted-list"><li style="list-style-type:disc"><strong>Curso:</strong> Estácio Desenvolvimento Full Stack</li></ul><ul id="ee7768e9-f3d1-4c19-b3b6-c53bdfe2a285" class="bulleted-list"><li style="list-style-type:disc"><strong>Universidade:</strong> Estácio de Sá - Campus Downtown</li></ul><ul id="1cd2dc10-0ebf-4d84-9ad3-c60108c12f14" class="bulleted-list"><li style="list-style-type:disc"><strong>Período:</strong> 3º</li></ul><ul id="ed535e9d-246b-4b37-8081-0d664328ae74" class="bulleted-list"><li style="list-style-type:disc"><strong>Turma:</strong> 9001</li></ul><ul id="f1b3e150-0fa5-4b6a-a671-573183dd6cea" class="bulleted-list"><li style="list-style-type:disc"><strong>Tutora:</strong> Alessandro Dos Santos Calin</li></ul><ul id="764fd938-3f40-4198-8bff-396212b4a358" class="bulleted-list"><li style="list-style-type:disc"><strong>Matéria:</strong> Vamos Manter as Informações? (RPG0015)</li></ul><h3 id="36870864-403b-40f9-ab76-70593841e80e" class=""><strong>Aluno</strong></h3><ul id="42abaa4f-93c9-4f1e-b602-e330feb797f7" class="bulleted-list"><li style="list-style-type:disc"><strong>Nome:</strong> João Victor Macedo Fernandes Ramos</li></ul><ul id="114fcbab-f137-4302-b965-4400ae17bc58" class="bulleted-list"><li style="list-style-type:disc"><strong>Matricula:</strong> 202208845011 </li></ul><h3 id="25511964-9837-49de-abfa-0484e3728acf" class=""><strong>Projeto</strong></h3><ul id="1b3e2ced-da16-401b-93b3-1b4d0408165d" class="bulleted-list"><li style="list-style-type:disc"><strong>Data:</strong> 06/04/2024</li></ul><ul id="ab7f2b2e-3721-4d8f-b41c-32dcb56963c2" class="bulleted-list"><li style="list-style-type:disc"><strong>GitHub:</strong> <a target="_blank" href="https://github.com/JoaoFernandesz/Missao-Pratica-Nivel2-Mundo3---Desenvolvimento-FullStack">https://github.com/JoaoFernandesz/Missao-Pratica-Nivel2-Mundo3---Desenvolvimento-FullStack</a></li></ul><ul id="0aae7e59-58d1-4ccb-87da-3e3a2e71081b" class="bulleted-list"><li style="list-style-type:disc"><strong>PDF:</strong> <a target="_blank" href="https://drive.usercontent.google.com/uc?id=181V5-Ffeaec2nXrZDYe-2V3kFGzw7g6S&export=download">Download PDF</a></li></ul><ul id="0aae7e59-58d1-4ccb-87da-3e3a2e71081b" class="bulleted-list"><li style="list-style-type:disc"><strong>Material de Apoio:</strong> <a target="_blank" href="https://sway.cloud.microsoft/s/9HQUpWu7S6bzXsqt/embed">Missão Prática | Nível 2 | Mundo 3</a></li></ul><p id="366bac80-0120-4027-b3bb-aa0b464fe49f" class="">
+    </p><h1 id="ec702108-8683-4ab4-afdd-e4b8820e5e34" class=""><strong>Implementação de um Sistema de Compra e Venda com Banco de Dados MSSQL</strong></h1><h2 id="bb6b53a3-37e4-4008-b2dd-2baa12045b13" class="">Sobre o Projeto</h2><p id="11e664c8-aa94-4a8d-bc31-148a24968396" class="">Este projeto, intitulado <strong>Implementação de um Sistema de Compra e Venda com Banco de Dados MSSQL</strong>, foi desenvolvido como parte da <strong>Missão Prática Nível 2 Mundo 3</strong> do curso da Estácio de Desenvolvimento Full Stack. O objetivo principal é implementar um sistema de gerenciamento de compras e vendas de produtos utilizando um banco de dados MSSQL. O projeto aborda a modelagem de dados, criação de tabelas e relacionamentos, inserção de dados e a realização de consultas para extrair informações relevantes.</p><h2 id="8f93a89e-eb69-437b-9717-430b9cdac97b" class="">Links Importantes</h2><ul id="91b66893-5454-4add-8b77-af701106553d" class="bulleted-list"><li style="list-style-type:disc"><strong>Documento de Entrega do Projeto:</strong> <a target="_blank" href="https://missao-pratica-nivel1-mundo3-desenvolvimento-full-stack.vercel.app/">Missao-Pratica-Nivel1-Mundo3---Desenvolvimento-FullStack</a></li></ul><ul id="92f78779-c682-41f4-a2e6-4b3194224458" class="bulleted-list"><li style="list-style-type:disc"><strong>PDF:</strong> <a target="_blank" href="https://drive.usercontent.google.com/uc?id=1H9DR4oTRe2Xl24ojWs53018LM0LRi3Xf&amp;export=download">Download PDF</a></li></ul><ul id="ae94ef19-c066-49bb-a390-9b249aa4ad97" class="bulleted-list"><li style="list-style-type:disc"><strong>Material de Apoio:</strong> <a target="_blank" href="https://sway.cloud.microsoft/s/MfUn8FQ2qR4Xv4kG/embed">Missão Prática | Nível 2 | Mundo 3</a></li></ul><h2 id="ca49a864-ed5a-4ae6-9333-28c9026fee26" class="">Características Principais</h2><ul id="499f8f5e-b1b8-4a0d-a9e0-44f246c9e775" class="bulleted-list"><li style="list-style-type:disc"><strong>Modelagem de Banco de Dados Relacional:</strong> O projeto define entidades como Usuários, Pessoas (Físicas e Jurídicas), Produtos e Movimentos (compras e vendas), estabelecendo relacionamentos para garantir a integridade dos dados.</li></ul><ul id="72805246-38b4-45d6-9bdd-e2356030eb17" class="bulleted-list"><li style="list-style-type:disc"><strong>Criação e Gerenciamento do Banco de Dados:</strong> Utilização da linguagem SQL para criar o banco de dados com tabelas, restrições e relacionamentos.</li></ul><ul id="5abdea8f-3331-4b59-bbec-d3c9bf9baf2a" class="bulleted-list"><li style="list-style-type:disc"><strong>Inserção de Dados:</strong> Adição de exemplos de dados em todas as tabelas para simular o funcionamento do sistema e permitir a realização de consultas.</li></ul><ul id="4c7e116f-ae94-4bff-a122-68c3fd02eb28" class="bulleted-list"><li style="list-style-type:disc"><strong>Consultas SQL Complexas:</strong> Implementação de diversas consultas para extrair informações como dados de pessoas, movimentações de entrada e saída, valores totais, e relatórios por produto e operador.</li></ul><ul id="0a1be0a3-7255-4923-9698-f105e555ef1a" class="bulleted-list"><li style="list-style-type:disc"><strong>Exploração de Conceitos Avançados:</strong> Utilização de sequências, chaves estrangeiras, junções entre tabelas e funções de agregação para consultas mais eficientes e informativas.</li></ul><h2 id="c92676e2-9a09-41b4-8ce7-5fa5d70f3e2c" class="">Tecnologias Utilizadas</h2><ul id="3e4c33b1-67fe-4386-b370-0c7d0bbfc8fa" class="bulleted-list"><li style="list-style-type:disc"><strong>MSSQL:</strong> Sistema gerenciador de banco de dados utilizado para armazenar e gerenciar os dados.</li></ul><ul id="9a4fe055-fcf7-43d3-9673-be40e5d6556f" class="bulleted-list"><li style="list-style-type:disc"><strong>SQL Server Management Studio:</strong> Ferramenta para interagir com o banco, executar scripts e realizar consultas.</li></ul><ul id="875b1393-3b20-4da1-8ef7-37018d0a1803" class="bulleted-list"><li style="list-style-type:disc"><strong>DBDesigner Fork:</strong> Software para a modelagem visual do banco de dados.</li></ul><h2 id="32ba643b-5a9c-4432-b99b-182118bbf4ea" class="">Aprendizados</h2><p id="3522b33c-8e93-49ae-8904-cc969d2d4f9e" class="">O projeto permitiu explorar os conceitos de modelagem de banco de dados relacional, a sintaxe SQL para criação e manipulação de dados (DDL e DML), e vivenciar a experiência prática de implementar um sistema com banco de dados. O trabalho também aborda a importância de chaves estrangeiras, a diferença entre sequences e identity, e a utilização de operadores da álgebra e cálculo relacional para construir consultas eficientes.</p><br><br><h1 id="91465cc9-f69a-4d2e-bfe1-c5615e6dd41f" class=""><strong>Procedimentos</strong></h1><ul id="2284dd6c-e05c-4157-a669-1d6ecfa4aed8" class="toggle"><li><details ><summary><strong>👉 1º Procedimento | </strong>Criando o Banco de Dados</summary><h2 id="8193a4b6-9f4f-4b65-b602-e6c036175808" class="">Modelagem</h2><h3 id="a897d589-23ed-45c9-b161-73a885d0e2c9" class="">Rascunho</h3><p id="5ea6c83a-2d15-4a24-97f1-2211bc7b6439" class="">Esquema inicial, realizado no Miro, para compreender a estrutura das entidades e relacionamentos</p><figure id="a50f111c-c6b2-47dd-97b0-fafde96faa1e" class="image"><a target="_blank" href="Relatorio/img/Diagrama_de_fluxo_-_Frame_1_(2).jpg"><img style="width:1894px" src="Relatorio/img/Diagrama_de_fluxo_-_Frame_1_(2).jpg"/></a></figure><h3 id="4f52562b-995f-4100-b345-97d27ce815b8" class="">Tabelas Principais</h3><ol type="1" id="cb52dc0d-6092-4132-87c9-a682c8c6a5ac" class="numbered-list" start="1"><li><strong>Usuários (Operadores)</strong><ul id="5641ecb8-e86d-4cb9-b712-0b003e8948d7" class="bulleted-list"><li style="list-style-type:disc"><code><strong>ID_Usuario</strong></code> (chave primária): Identificador único para cada usuário (operador) do sistema.</li></ul><ul id="e54132fe-323e-49c4-aa38-3b6c853d5b98" class="bulleted-list"><li style="list-style-type:disc"><code><strong>Nome</strong></code>: Nome completo do usuário.</li></ul><ul id="0c9247b0-81f4-4ecd-931b-bc2585b73588" class="bulleted-list"><li style="list-style-type:disc"><code><strong>Email</strong></code>: Endereço de email do usuário. Deve ser único entre todos os usuários.</li></ul><ul id="9de26e9b-1465-41e6-974f-18e9f59c8b02" class="bulleted-list"><li style="list-style-type:disc"><code><strong>Senha</strong></code>: Senha para acesso ao sistema pelo usuário.</li></ul></li></ol><ol type="1" id="3a7e700b-c67a-4842-ac19-cc8d22ce0604" class="numbered-list" start="2"><li><strong>Pessoas</strong><ul id="8fceea9f-f410-4f82-a1ff-0291d69a4071" class="bulleted-list"><li style="list-style-type:disc"><code><strong>ID_Pessoa</strong></code> (chave primária): Identificador único para cada pessoa, seja ela física ou jurídica.</li></ul><ul id="ff52917f-7bf8-4616-9a00-fa95107b7e4e" class="bulleted-list"><li style="list-style-type:disc"><code><strong>Nome</strong></code>: Nome da pessoa (ou razão social, no caso de pessoa jurídica).</li></ul><ul id="78de2540-685b-4e6a-bec6-00631e12dff5" class="bulleted-list"><li style="list-style-type:disc"><code><strong>Telefone</strong></code>: Número de telefone de contato.</li></ul><ul id="b7ff798e-69ee-4916-959c-c362e337791a" class="bulleted-list"><li style="list-style-type:disc"><code><strong>TipoPessoa</strong></code>: Indica o tipo da pessoa (&#x27;F&#x27; para física e &#x27;J&#x27; para jurídica).</li></ul><ul id="f03a6f61-035a-4d06-996c-908b1d23ff10" class="bulleted-list"><li style="list-style-type:disc"><code><strong>CPF_CNPJ</strong></code>: Número do CPF (para pessoa física) ou CNPJ (para pessoa jurídica). Deve ser único.</li></ul><ul id="19297574-6f0a-4961-8858-9f99d9685462" class="bulleted-list"><li style="list-style-type:disc"><code><strong>Logradouro</strong></code>: Endereço da pessoa, incluindo rua, número e complemento.</li></ul><ul id="887c3abe-9ac2-4dd0-af40-821a68d21923" class="bulleted-list"><li style="list-style-type:disc"><code><strong>Cidade</strong></code>: Cidade do endereço.</li></ul><ul id="9b1e015f-06d2-4cc1-85fe-e1576b033c4d" class="bulleted-list"><li style="list-style-type:disc"><code><strong>Estado</strong></code>: Estado do endereço.</li></ul><ul id="1201ee44-98d0-4b6a-b0c6-f026d7c5e30b" class="bulleted-list"><li style="list-style-type:disc"><code><strong>Email</strong></code>: Endereço de email da pessoa.</li></ul></li></ol><ol type="1" id="f585a615-7095-4b25-b0ed-d7da29a77f0d" class="numbered-list" start="3"><li><strong>Produtos</strong><ul id="4521069b-3563-4e81-8158-5857239aded8" class="bulleted-list"><li style="list-style-type:disc"><code><strong>ID_Produto</strong></code> (chave primária): Identificador único de cada produto cadastrado no sistema.</li></ul><ul id="7dc6f211-067e-4ed8-8e1e-32263f205dad" class="bulleted-list"><li style="list-style-type:disc"><code><strong>Nome</strong></code>: Nome ou descrição do produto.</li></ul><ul id="693a4cf4-e2c6-4151-aeda-ca7b4c537a5b" class="bulleted-list"><li style="list-style-type:disc"><code><strong>Quantidade</strong></code>: Quantidade disponível do produto em estoque.</li></ul><ul id="7b91fbe1-f08d-415b-9c1e-274f7b8bc0f8" class="bulleted-list"><li style="list-style-type:disc"><code><strong>PrecoVenda</strong></code>: Preço unitário de venda do produto.</li></ul></li></ol><ol type="1" id="e60bfb9e-e051-4033-816f-bcddeef51110" class="numbered-list" start="4"><li><strong>Movimento</strong><ul id="fade3cf1-999f-4ea8-a7b0-b943fb8c2494" class="bulleted-list"><li style="list-style-type:disc"><code><strong>ID_Movimento</strong></code> (chave primária): Identificador único de cada movimento de compra ou venda.</li></ul><ul id="6e2ef606-cd33-4be0-90fd-4e17db7d3287" class="bulleted-list"><li style="list-style-type:disc"><code><strong>ID_Produto</strong></code> (chave estrangeira): Referência ao produto envolvido no movimento.</li></ul><ul id="c58a2a84-37e1-4379-9c9a-12c61c93087b" class="bulleted-list"><li style="list-style-type:disc"><code><strong>ID_Operador</strong></code> (chave estrangeira): Referência ao usuário que realizou o movimento.</li></ul><ul id="17c932a4-0a29-4a8b-a2b2-3e620efaf189" class="bulleted-list"><li style="list-style-type:disc"><code><strong>ID_Pessoa</strong></code> (chave estrangeira): Referência à pessoa (física para vendas e jurídica para compras) envolvida no movimento.</li></ul><ul id="0c56aebc-ad1d-4ecd-b895-c90bc5cc4368" class="bulleted-list"><li style="list-style-type:disc"><code><strong>TipoMovimento</strong></code>: Indica se o movimento é uma compra (&#x27;C&#x27;) ou venda (&#x27;V&#x27;).</li></ul><ul id="d80404bd-26d4-4d40-bb5a-47928bed9b32" class="bulleted-list"><li style="list-style-type:disc"><code><strong>Quantidade</strong></code>: Número de unidades do produto movimentadas.</li></ul><ul id="714a66d8-ee91-41fa-848a-fc17c2aeea9c" class="bulleted-list"><li style="list-style-type:disc"><code><strong>PrecoUnitario</strong></code>: Preço unitário do produto no momento do movimento.</li></ul><ul id="d93edef2-9679-4e3c-a36e-7eba6a7f28f5" class="bulleted-list"><li style="list-style-type:disc"><code><strong>DataMovimento</strong></code>: Data e hora em que o movimento foi registrado.</li></ul></li></ol><h3 id="4dfc8527-c68f-4b88-83e0-9b967360288d" class="">Relações</h3><ul id="3d422198-97df-4772-bdb4-c751d4d0cceb" class="bulleted-list"><li style="list-style-type:disc"><strong>Usuários e Movimentos</strong>: A tabela <strong>Movimento</strong> associa cada operação (compra ou venda) a um usuário específico, permitindo rastrear quem realizou cada movimento.</li></ul><ul id="fcb671fe-0d6a-4cc3-852f-c50541a5e443" class="bulleted-list"><li style="list-style-type:disc"><strong>Pessoas e Movimentos</strong>: A tabela <strong>Movimento</strong> também associa cada operação a uma pessoa específica, diferenciando se a operação foi uma compra (pessoa jurídica) ou venda (pessoa física).</li></ul><ul id="cf45ad5b-3d58-4008-9576-4366caac8e97" class="bulleted-list"><li style="list-style-type:disc"><strong>Produtos e Movimentos</strong>: Cada movimento de compra ou venda está diretamente relacionado a um produto específico, impactando a quantidade disponível desse produto no estoque.</li></ul><h3 id="bbdfe130-8eac-460f-9c49-2b2c58013817" class="">Modelo</h3><figure id="192312ed-35f5-4e1a-8cb9-558dac11735a" class="image"><a target="_blank" href="Relatorio/img/Untitled.png"><img style="width:1256px" src="Relatorio/img/Untitled.png"/></a></figure><h3 id="f91e9174-b112-489a-b0c3-f8d64311a394" class="">Login SA</h3><ul id="db927b77-5ed7-4b80-b89d-99b5a9e35013" class="bulleted-list"><li style="list-style-type:disc">Ao verificar os logins registrados, foi observado que o SA estava inativo.<figure id="ba55a04d-2e6b-4d20-ba5c-7318be68e342" class="image"><a target="_blank" href="Relatorio/img/Untitled%201.png"><img style="width:240px" src="Relatorio/img/Untitled%201.png"/></a></figure></li></ul><ul id="7fd4b34b-2e5c-49e6-b6cc-bbe6dde0d260" class="bulleted-list"><li style="list-style-type:disc">Assim, realizei a ativação através da modificação das suas propriedades.<figure id="3a429516-ed4b-4023-8c00-2b164ba5a94f" class="image"><a target="_blank" href="Relatorio/img/Untitled%202.png"><img style="width:384px" src="Relatorio/img/Untitled%202.png"/></a></figure></li></ul><h3 id="951a4b30-e9a0-4f88-88fa-ad02e407c75b" class="">Criação do Login “loja”</h3><ul id="63b7c68c-1527-4585-8eb9-b5cb8b06831e" class="bulleted-list"><li style="list-style-type:disc">Create Login<figure id="9aa30006-6ff9-40ab-a6b8-546a0a90f1cf" class="image"><a target="_blank" href="Relatorio/img/Untitled%203.png"><img style="width:432px" src="Relatorio/img/Untitled%203.png"/></a></figure></li></ul><h3 id="d64eba75-5720-4a76-aa5d-0836f5bfa825" class="">Definição Prática do Modelo</h3><ul id="005d79a4-836c-4fc1-88b5-556e5b8c02cb" class="bulleted-list"><li style="list-style-type:disc"><strong>OBS: </strong>Com os requisitos do terceiro passo, realizei a alteração de algumas partes da estrutura para incluir as entidades PessoaFisica e PessoaJuridica.<ul id="af296734-4cbb-44bc-9b52-4d748308b635" class="bulleted-list"><li style="list-style-type:circle">Códigos:<ul id="6df62a4c-bc2a-4a5f-8885-683ab4fa3af4" class="toggle"><li><details ><summary>loja.sql</summary><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1f2860a8-a0e3-4683-bb08-e1a78fd5392b" class="code"><code class="language-SQL" style="white-space:pre-wrap;word-break:break-all">CREATE SEQUENCE Seq_ID_Pessoa
+        START WITH 1
+        INCREMENT BY 1;
+    GO
+    
+    CREATE TABLE Produto (
+      ID_Produto INTEGER NOT NULL,
+      Nome VARCHAR(255) NOT NULL,
+      Quantidade INTEGER NOT NULL CHECK (Quantidade &gt;= 0),
+      PrecoVenda DECIMAL(10, 2) NOT NULL CHECK (PrecoVenda &gt;= 0),
+      PRIMARY KEY(ID_Produto) 
+    );
+    GO
+    
+    CREATE TABLE Usuario (
+      ID_Usuario INTEGER NOT NULL,
+      Login VARCHAR(255) UNIQUE NOT NULL,
+      Senha VARCHAR(255) NOT NULL,
+      PRIMARY KEY(ID_Usuario) 
+    );
+    GO
+    
+    CREATE TABLE Pessoa (
+      ID_Pessoa INTEGER NOT NULL DEFAULT (NEXT VALUE FOR Seq_ID_Pessoa),
+      Nome VARCHAR(255) NOT NULL,
+      Telefone VARCHAR(11) NOT NULL,
+      Logradouro VARCHAR(255) NOT NULL,
+      Cidade VARCHAR(255) NOT NULL,
+      Estado CHAR(2) NOT NULL,
+      Email VARCHAR(255) NOT NULL,
+      PRIMARY KEY(ID_Pessoa) 
+    );
+    GO
+    
+    CREATE TABLE PessoaFisica (
+      ID_Pessoa INTEGER NOT NULL,
+      CPF VARCHAR(11) NOT NULL UNIQUE,
+      FOREIGN KEY(ID_Pessoa) REFERENCES Pessoa(ID_Pessoa),
+      PRIMARY KEY(ID_Pessoa)
+    );
+    GO
+    
+    CREATE TABLE PessoaJuridica (
+      ID_Pessoa INTEGER NOT NULL,
+      CNPJ VARCHAR(14) NOT NULL UNIQUE,
+      FOREIGN KEY(ID_Pessoa) REFERENCES Pessoa(ID_Pessoa),
+      PRIMARY KEY(ID_Pessoa)
+    );
+    GO
+    
+    CREATE TABLE Movimento (
+      ID_Movimento INTEGER NOT NULL,
+      ID_Produto INTEGER NOT NULL,
+      ID_Usuario INTEGER NOT NULL,
+      ID_Pessoa INTEGER NOT NULL,
+      TipoMovimento CHAR(1) NOT NULL CHECK (TipoMovimento IN (&#x27;C&#x27;, &#x27;V&#x27;)),
+      Quantidade INTEGER NOT NULL CHECK (Quantidade &gt; 0),
+      PrecoUnitario DECIMAL(10, 2) NOT NULL CHECK (PrecoUnitario &gt;= 0),
+      DataMovimento DATETIME NOT NULL DEFAULT (getdate()),
+      PRIMARY KEY(ID_Movimento), 
+      FOREIGN KEY(ID_Pessoa) REFERENCES Pessoa(ID_Pessoa),
+      FOREIGN KEY(ID_Produto) REFERENCES Produto(ID_Produto),
+      FOREIGN KEY(ID_Usuario) REFERENCES Usuario(ID_Usuario)
+    );
+    GO
+    </code></pre></details></li></ul></li></ul><ul id="396fe3f1-82a2-4dbf-a10c-54749c3b5188" class="bulleted-list"><li style="list-style-type:circle">Resultados:<ul id="49e55b04-f6eb-41a8-9184-e62cc48ff70b" class="toggle"><li><details ><summary>Pastas</summary><figure id="69216f82-c951-4b79-8d80-6f4db4047a85" class="image" style="text-align:left"><a target="_blank" href="Relatorio/img/Untitled%204.png"><img style="width:192px" src="Relatorio/img/Untitled%204.png"/></a></figure><figure id="c60b4a6f-80a8-404c-b7e0-ff25ee4029ad" class="image" style="text-align:left"><a target="_blank" href="Relatorio/img/Untitled%205.png"><img style="width:192px" src="Relatorio/img/Untitled%205.png"/></a></figure><figure id="58437e85-568d-4ba0-a1dd-3966eb1dea5d" class="image" style="text-align:left"><a target="_blank" href="Relatorio/img/Untitled%206.png"><img style="width:192px" src="Relatorio/img/Untitled%206.png"/></a></figure></details></li></ul><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="cf7934ec-2896-4320-85fd-c32911dc428c" class="code"><code class="language-SQL" style="white-space:pre-wrap;word-break:break-all">Commands completed successfully.
+    
+    Completion time: 2024-04-06T22:25:15.3019361-03:00
+    </code></pre></li></ul></li></ul><h3 id="1056af4a-ee51-43a9-b638-6b5d2256e3ce" class="">Conexão DBDesigner Fork + SQL Server Management Studio</h3><ul id="dcf6cb0c-4ebe-47ef-9cf3-af22fbe5b0f5" class="bulleted-list"><li style="list-style-type:disc">Realizei a conexão para testar a funcionalidade de <em>Reverse Engineering</em><ul id="39ba46ae-1e03-431f-99a7-973ee734b180" class="bulleted-list"><li style="list-style-type:circle"><a target="_blank" href="https://drive.google.com/file/d/1mEgCgMQEX3Sg4aSNMXsWE_kSwz-7tpT3/view?usp=sharing"><strong>Conexão DBDesigner Fork + SQL Server Management Studio</strong></a></li></ul></li></ul><br><br><h2 id="abc41430-8d79-4da9-b5f8-2e12be594eab" class="">Análise e Conclusão:</h2><h3 id="51b8dd69-4510-45c1-8ebb-c21b85357631" class="">“Como são implementadas as diferentes cardinalidades, basicamente<br/>1X1, 1XN ou NxN, em um banco de dados relacional?”<br/></h3><ul id="bc34f185-562e-4161-acef-4cd0123706e7" class="bulleted-list"><li style="list-style-type:disc"><strong>1X1 (Um para Um):</strong> Ambas as tabelas possuem uma chave única que referencia a outra tabela. Exemplo: Uma pessoa possui apenas um passaporte e um passaporte pertence a apenas uma pessoa.</li></ul><ul id="95e995b0-5b27-4759-ad49-9f72027428a4" class="bulleted-list"><li style="list-style-type:disc"><strong>1XN (Um para Muitos):</strong> Uma tabela possui uma chave única que referencia várias entradas em outra tabela. Exemplo: Um cliente pode fazer vários pedidos, mas um pedido pertence a apenas um cliente.</li></ul><ul id="64726b53-f190-4e42-bd8e-5fb7db0d19d4" class="bulleted-list"><li style="list-style-type:disc"><strong>NXN (Muitos para Muitos):</strong> É necessário criar uma tabela intermediária para associar as duas tabelas principais, com chaves estrangeiras para ambas. Exemplo: Um aluno pode se matricular em vários cursos e um curso pode ter vários alunos.</li></ul><h3 id="7513f110-efd6-45dc-85ff-0e4a517d0ed0" class="">“Que tipo de relacionamento deve ser utilizado para representar o uso<br/>de herança em bancos de dados relacionais?”<br/></h3><ul id="6a85b033-3f42-4fe6-aec5-41430e0a4547" class="bulleted-list"><li style="list-style-type:disc"><strong>Tabela única:</strong> Todas as subclasses compartilham uma única tabela com uma coluna para indicar o tipo.</li></ul><ul id="e92c3ad5-2f0e-4a39-bf7f-5b711dbbf343" class="bulleted-list"><li style="list-style-type:disc"><strong>Tabela por subclasse:</strong> Cada subclasse possui sua própria tabela com atributos específicos e uma chave estrangeira para a tabela pai.</li></ul><h3 id="06d7ed5d-82d0-425d-aa6e-59d983c0813f" class="">“Como o SQL Server Management Studio permite a melhoria da<br/>produtividade nas tarefas relacionadas ao gerenciamento do banco de<br/>dados?”<br/></h3><ul id="d7a5855b-302e-4882-8276-75b163ce9aaa" class="bulleted-list"><li style="list-style-type:disc"><strong>Interface gráfica:</strong> Simplifica tarefas como criação e gerenciamento de tabelas, consultas, backups e segurança.</li></ul><ul id="d46e3678-3557-41a5-b397-22bb558cb209" class="bulleted-list"><li style="list-style-type:disc"><strong>Ferramentas de desenvolvimento:</strong> Editor de consultas com realce de sintaxe, depuração e execução de scripts.</li></ul><ul id="b0b0b8b2-6abf-4775-a958-aebfa7950bb5" class="bulleted-list"><li style="list-style-type:disc"><strong>Monitoramento e otimização:</strong> Análise de desempenho, identificação de gargalos e ajuste de consultas.</li></ul><ul id="284ed16b-ac1e-4d43-98ce-a7bbef4b437f" class="bulleted-list"><li style="list-style-type:disc"><strong>Automação de tarefas:</strong> Agendamento de jobs e scripts para automatizar rotinas de manutenção.</li></ul></details></li></ul><ul id="832f0e39-7c64-4548-8abc-ebb15747aa1d" class="toggle"><li><details ><summary><strong>👉 2º Procedimento | </strong>Alimentando a Base</summary><h2 id="88153633-f4e6-4e03-8ac9-ff34b5cda566" class="">Inserções</h2><h3 id="f0420c84-e23b-4784-89ac-aca7547dbc3c" class="">Usuário:</h3><ul id="e6a3171d-dd3f-494e-91a7-fbdb7b5f4b94" class="bulleted-list"><li style="list-style-type:disc">Código:<ul id="b5c043ba-eb0c-419c-9184-cb45d965149c" class="toggle"><li><details ><summary>insertUsuario.sql</summary><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="997fea1a-0edb-48fd-bb57-c6a4a2d88d47" class="code"><code class="language-SQL" style="white-space:pre-wrap;word-break:break-all">INSERT INTO Usuario (ID_Usuario, Login, Senha) VALUES (1, &#x27;op1&#x27;, &#x27;op1&#x27;);
+    INSERT INTO Usuario (ID_Usuario, Login, Senha) VALUES (2, &#x27;op2&#x27;, &#x27;op1&#x27;);
+    INSERT INTO Usuario (ID_Usuario, Login, Senha) VALUES (3, &#x27;op3&#x27;, &#x27;op1&#x27;);
+    GO
+    
+    SELECT *
+    FROM Usuario;</code></pre></details></li></ul></li></ul><ul id="6e6219f3-db78-4566-b5cb-08a4a360a859" class="bulleted-list"><li style="list-style-type:disc">Resultado:<ul id="c4908283-f1db-45ac-8cff-7861defa8d93" class="toggle"><li><details ><summary>Print</summary><figure id="9e845647-a952-4248-9c82-4abe7cb2b1ef" class="image"><a target="_blank" href="Relatorio/img/Untitled%207.png"><img style="width:605px" src="Relatorio/img/Untitled%207.png"/></a></figure></details></li></ul></li></ul><h3 id="70be685b-c776-48d5-977d-d8b947fb9d5b" class="">Produto:</h3><ul id="bbc06000-8637-47c9-8e54-3c3afd4eba78" class="bulleted-list"><li style="list-style-type:disc">Código:<ul id="ac70a109-20f6-49a4-8186-429ca23fc32e" class="toggle"><li><details ><summary>insertProduto.sql</summary><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="34c85f09-fc58-4de0-ac6d-dac9c9f355f8" class="code"><code class="language-SQL" style="white-space:pre-wrap;word-break:break-all">INSERT INTO Produto (ID_Produto, Nome, Quantidade, PrecoVenda) VALUES (1, &#x27;Banana&#x27;, 100, 5.00);
+    INSERT INTO Produto (ID_Produto, Nome, Quantidade, PrecoVenda) VALUES (3, &#x27;Laranja&#x27;, 500, 2.00);
+    INSERT INTO Produto (ID_Produto, Nome, Quantidade, PrecoVenda) VALUES (4, &#x27;Manga&#x27;, 800, 4.00);
+    GO
+    
+    SELECT *
+    FROM Produto</code></pre></details></li></ul></li></ul><ul id="084203b2-ae9e-45f5-aeed-296d52e91fe8" class="bulleted-list"><li style="list-style-type:disc">Resultado:<ul id="e96ae1f0-4408-4578-bad0-68f8c4eb9d1e" class="toggle"><li><details ><summary>Print</summary><figure id="b0a2af25-b1a5-4a5c-902f-b7afa8313f55" class="image"><a target="_blank" href="Relatorio/img/Untitled%208.png"><img style="width:876px" src="Relatorio/img/Untitled%208.png"/></a></figure></details></li></ul></li></ul><h3 id="7450f4d4-4bcb-47ef-b7ca-bce760545e02" class="">Pessoa Física:</h3><ul id="06f69435-ee0d-4fec-8ad7-429171cff0d4" class="bulleted-list"><li style="list-style-type:disc">Código:<ul id="79b01f80-cef7-45ac-a634-6492f3659906" class="toggle"><li><details ><summary>insertPessoaFisica.sql</summary><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="cd924090-d768-4098-a702-bf63965edb4b" class="code"><code class="language-SQL" style="white-space:pre-wrap;word-break:break-all">DECLARE @CapturaID TABLE (ID_Pessoa INT);
+    
+    INSERT INTO Pessoa (Nome, Telefone, Logradouro, Cidade, Estado, Email)
+    OUTPUT INSERTED.ID_Pessoa INTO @CapturaID
+    VALUES (&#x27;Joao&#x27;, &#x27;1111-1111&#x27;, &#x27;Rua 12, casa 3, Quitanda&#x27;, &#x27;Riacho do Sul&#x27;, &#x27;PA&#x27;, &#x27;joao@riacho.com&#x27;);
+    
+    INSERT INTO PessoaFisica (ID_Pessoa, CPF)
+    SELECT ID_Pessoa, &#x27;11111111211&#x27; FROM @CapturaID;
+    GO
+    
+    DECLARE @CapturaID TABLE (ID_Pessoa INT);
+    
+    INSERT INTO Pessoa (Nome, Telefone, Logradouro, Cidade, Estado, Email)
+    OUTPUT INSERTED.ID_Pessoa INTO @CapturaID
+    VALUES (&#x27;Joao&#x27;, &#x27;1111-1111&#x27;, &#x27;Rua 12, casa 3, Quitanda&#x27;, &#x27;Riacho do Sul&#x27;, &#x27;PA&#x27;, &#x27;joao@riacho.com&#x27;);
+    
+    INSERT INTO PessoaFisica (ID_Pessoa, CPF)
+    SELECT ID_Pessoa, &#x27;11111111111&#x27; FROM @CapturaID;
+    GO
+    
+    SELECT
+        P.ID_Pessoa,
+        P.Nome,
+        P.Telefone,
+        P.Logradouro,
+        P.Cidade,
+        P.Estado,
+        P.Email,
+        PF.ID_Pessoa,
+        PF.CPF
+    FROM Pessoa P
+    INNER JOIN PessoaFisica PF ON P.ID_Pessoa = PF.ID_Pessoa;
+    </code></pre></details></li></ul><ul id="50408e8f-fd64-43f9-be46-f31c6d26a2db" class="bulleted-list"><li style="list-style-type:circle">Obs: faço dois inserts para poder testar a funcionalidade de salvar o ultimo id para o insert do Pessoa</li></ul></li></ul><ul id="37a826b9-b83d-400f-b063-a873a3229542" class="bulleted-list"><li style="list-style-type:disc">Resultado:<ul id="dad82560-c238-4a38-a15e-e5ee13ae5d86" class="toggle"><li><details ><summary>Print</summary><figure id="b30f8fe1-7a19-4ce6-b2a6-9534ea1e530c" class="image"><a target="_blank" href="Relatorio/img/Untitled%209.png"><img style="width:708px" src="Relatorio/img/Untitled%209.png"/></a></figure><p id="2186d73b-003e-4552-a273-5bda2b524be8" class="">
+    </p></details></li></ul></li></ul><h3 id="69a1b035-7d7e-47d6-aa7c-9264613fb93a" class="">Pessoa Jurídica:</h3><ul id="ff9dc956-3a27-49b8-a7a0-59dad47d637c" class="bulleted-list"><li style="list-style-type:disc">Código:<ul id="dfdfd741-ff1c-467b-a166-b550c4feec0d" class="toggle"><li><details ><summary>insertPessoaJuridica.sql</summary><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="445eeceb-0a9e-41ac-b707-a0dd9749c721" class="code"><code class="language-SQL" style="white-space:pre-wrap;word-break:break-all">DECLARE @CapturaID TABLE (ID_Pessoa INT);
+    
+    INSERT INTO Pessoa (Nome, Telefone, Logradouro, Cidade, Estado, Email)
+    OUTPUT INSERTED.ID_Pessoa INTO @CapturaID
+    VALUES (&#x27;JJC&#x27;, &#x27;1212-1212&#x27;, &#x27;Rua 1, Centro&#x27;, &#x27;Riacho do Norte&#x27;, &#x27;PA&#x27;, &#x27;jjc@riacho.com&#x27;);
+    
+    INSERT INTO PessoaJuridica(ID_Pessoa, CNPJ)
+    SELECT ID_Pessoa, &#x27;22222222222222&#x27; FROM @CapturaID;
+    GO
+    
+    SELECT
+        P.ID_Pessoa,
+        P.Nome,
+        P.Telefone,
+        P.Logradouro,
+        P.Cidade,
+        P.Estado,
+        P.Email,
+        PJ.ID_Pessoa,
+        PJ.CNPJ
+    FROM Pessoa P
+    INNER JOIN PessoaJuridica PJ ON P.ID_Pessoa = PJ.ID_Pessoa;
+    </code></pre></details></li></ul></li></ul><ul id="9c8dab03-68f3-4a8e-b7ba-a5a2a9d30e61" class="bulleted-list"><li style="list-style-type:disc">Resultado:<ul id="0758e8a2-eb6c-4c46-b1bb-879ae7e89d8d" class="toggle"><li><details ><summary>Print</summary><figure id="7b8410c7-7b15-423f-9c3f-471f8ce3b0b7" class="image"><a target="_blank" href="Relatorio/img/Untitled%2010.png"><img style="width:740px" src="Relatorio/img/Untitled%2010.png"/></a></figure><p id="36995965-5cde-469f-9e8c-35623c7895f8" class="">
+    </p></details></li></ul></li></ul><h3 id="6df3814d-ff25-4f16-9cc7-b66ec0072fa1" class="">Movimentos:</h3><ul id="ac1d18ee-1698-46c6-8bf4-321ce7643fdb" class="bulleted-list"><li style="list-style-type:disc">Código:<ul id="b6333b02-ebbf-4ec8-8561-2673fcef886a" class="toggle"><li><details ><summary>insertMovimento.sql</summary><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="06f1db67-de09-4d94-9983-983effd40550" class="code"><code class="language-SQL" style="white-space:pre-wrap;word-break:break-all">INSERT INTO Movimento (ID_Produto, ID_Usuario, ID_Pessoa, TipoMovimento, Quantidade, PrecoUnitario) 
+    VALUES (1, 1, 12, &#x27;V&#x27;, 50, (SELECT PrecoVenda FROM Produto WHERE ID_Produto = 1));
+    
+    INSERT INTO Movimento (ID_Produto, ID_Usuario, ID_Pessoa, TipoMovimento, Quantidade, PrecoUnitario) 
+    VALUES (3, 2, 14, &#x27;C&#x27;, 100, (SELECT PrecoVenda FROM Produto WHERE ID_Produto = 3));
+    GO
+    
+    SELECT *
+    FROM Movimento</code></pre></details></li></ul></li></ul><ul id="2aad7c8e-4955-4859-b9ad-90e3c28570c2" class="bulleted-list"><li style="list-style-type:disc">Resultado:<ul id="f4a8cecf-df29-4749-8ad7-698176bd9280" class="toggle"><li><details ><summary>Print</summary><figure id="3006a00b-ca90-4959-9401-1a6cb306f165" class="image"><a target="_blank" href="Relatorio/img/Untitled%2011.png"><img style="width:770px" src="Relatorio/img/Untitled%2011.png"/></a></figure><p id="34385253-c8e0-4431-8f7b-c713877c666f" class="">
+    </p></details></li></ul><p id="76b071a2-8cfd-4f90-85b3-dc4b069e3942" class="">
+    </p></li></ul><h2 id="3fc68410-acfa-4a05-85b9-3b17b7cc62db" class="">Inserções Extras</h2><ul id="55e49170-8535-4494-ac60-2da0cad74cb7" class="bulleted-list"><li style="list-style-type:disc">Para tornar as consultas mais ricas e interessantes, realizei algumas inserções adicionais no banco de dados, além das previstas no roteiro original.</li></ul><ul id="4b779ddb-8bff-42f1-8fe2-42056dcd9eb0" class="bulleted-list"><li style="list-style-type:disc">Código:<ul id="a310553f-8bbd-49e8-b3a7-1e70af8a0a90" class="toggle"><li><details ><summary>insertExtras.sql</summary><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="0a5963c9-04d6-4f29-9d18-6d8a27df0b63" class="code"><code class="language-SQL" style="white-space:pre-wrap;word-break:break-all">INSERT INTO Usuario (ID_Usuario, Login, Senha) VALUES (4, &#x27;alice&#x27;, &#x27;alice123&#x27;);
+    INSERT INTO Usuario (ID_Usuario, Login, Senha) VALUES (5, &#x27;bob&#x27;, &#x27;bob456&#x27;);
+    INSERT INTO Usuario (ID_Usuario, Login, Senha) VALUES (6, &#x27;charlie&#x27;, &#x27;charlie789&#x27;);
+    INSERT INTO Usuario (ID_Usuario, Login, Senha) VALUES (7, &#x27;diana&#x27;, &#x27;diana!@#&#x27;);
+    INSERT INTO Usuario (ID_Usuario, Login, Senha) VALUES (8, &#x27;eva&#x27;, &#x27;eva999&#x27;);
+    INSERT INTO Usuario (ID_Usuario, Login, Senha) VALUES (9, &#x27;frank&#x27;, &#x27;frank777&#x27;);
+    INSERT INTO Usuario (ID_Usuario, Login, Senha) VALUES (10, &#x27;grace&#x27;, &#x27;grace2020&#x27;);
+    INSERT INTO Usuario (ID_Usuario, Login, Senha) VALUES (11, &#x27;harry&#x27;, &#x27;harrypotter&#x27;);
+    INSERT INTO Usuario (ID_Usuario, Login, Senha) VALUES (12, &#x27;irene&#x27;, &#x27;irene567&#x27;);
+    INSERT INTO Usuario (ID_Usuario, Login, Senha) VALUES (13, &#x27;jason&#x27;, &#x27;jasonxyz&#x27;);
+    INSERT INTO Usuario (ID_Usuario, Login, Senha) VALUES (14, &#x27;karen&#x27;, &#x27;karen123&#x27;);
+    INSERT INTO Usuario (ID_Usuario, Login, Senha) VALUES (15, &#x27;lucas&#x27;, &#x27;lucas456&#x27;);
+    INSERT INTO Usuario (ID_Usuario, Login, Senha) VALUES (16, &#x27;megan&#x27;, &#x27;megan777&#x27;);
+    INSERT INTO Usuario (ID_Usuario, Login, Senha) VALUES (17, &#x27;nathan&#x27;, &#x27;nathan999&#x27;);
+    INSERT INTO Usuario (ID_Usuario, Login, Senha) VALUES (18, &#x27;olivia&#x27;, &#x27;olivia2020&#x27;);
+    INSERT INTO Usuario (ID_Usuario, Login, Senha) VALUES (19, &#x27;peter&#x27;, &#x27;peterpan&#x27;);
+    INSERT INTO Usuario (ID_Usuario, Login, Senha) VALUES (20, &#x27;quinn&#x27;, &#x27;quinn567&#x27;);
+    INSERT INTO Usuario (ID_Usuario, Login, Senha) VALUES (21, &#x27;rachel&#x27;, &#x27;rachel123&#x27;);
+    INSERT INTO Usuario (ID_Usuario, Login, Senha) VALUES (22, &#x27;steve&#x27;, &#x27;steve456&#x27;);
+    INSERT INTO Usuario (ID_Usuario, Login, Senha) VALUES (23, &#x27;tina&#x27;, &#x27;tina!@#&#x27;);
+    
+    
+    INSERT INTO Produto (ID_Produto, Nome, Quantidade, PrecoVenda) VALUES (2, &#x27;Maçã&#x27;, 200, 3.00);
+    INSERT INTO Produto (ID_Produto, Nome, Quantidade, PrecoVenda) VALUES (5, &#x27;Abacaxi&#x27;, 300, 6.00);
+    INSERT INTO Produto (ID_Produto, Nome, Quantidade, PrecoVenda) VALUES (6, &#x27;Morango&#x27;, 150, 7.00);
+    INSERT INTO Produto (ID_Produto, Nome, Quantidade, PrecoVenda) VALUES (7, &#x27;Uva&#x27;, 400, 8.00);
+    INSERT INTO Produto (ID_Produto, Nome, Quantidade, PrecoVenda) VALUES (8, &#x27;Pêra&#x27;, 250, 4.50);
+    INSERT INTO Produto (ID_Produto, Nome, Quantidade, PrecoVenda) VALUES (9, &#x27;Kiwi&#x27;, 180, 5.50);
+    INSERT INTO Produto (ID_Produto, Nome, Quantidade, PrecoVenda) VALUES (10, &#x27;Melancia&#x27;, 1000, 10.00);
+    INSERT INTO Produto (ID_Produto, Nome, Quantidade, PrecoVenda) VALUES (11, &#x27;Melão&#x27;, 700, 6.50);
+    INSERT INTO Produto (ID_Produto, Nome, Quantidade, PrecoVenda) VALUES (12, &#x27;Coco&#x27;, 300, 5.00);
+    INSERT INTO Produto (ID_Produto, Nome, Quantidade, PrecoVenda) VALUES (13, &#x27;Pêssego&#x27;, 120, 4.00);
+    INSERT INTO Produto (ID_Produto, Nome, Quantidade, PrecoVenda) VALUES (14, &#x27;Ameixa&#x27;, 80, 3.50);
+    INSERT INTO Produto (ID_Produto, Nome, Quantidade, PrecoVenda) VALUES (15, &#x27;Limão&#x27;, 400, 2.50);
+    INSERT INTO Produto (ID_Produto, Nome, Quantidade, PrecoVenda) VALUES (16, &#x27;Pitaya&#x27;, 50, 9.00);
+    INSERT INTO Produto (ID_Produto, Nome, Quantidade, PrecoVenda) VALUES (17, &#x27;Cereja&#x27;, 100, 8.50);
+    INSERT INTO Produto (ID_Produto, Nome, Quantidade, PrecoVenda) VALUES (18, &#x27;Goiaba&#x27;, 200, 3.50);
+    INSERT INTO Produto (ID_Produto, Nome, Quantidade, PrecoVenda) VALUES (19, &#x27;Açaí&#x27;, 300, 12.00);
+    INSERT INTO Produto (ID_Produto, Nome, Quantidade, PrecoVenda) VALUES (20, &#x27;Jabuticaba&#x27;, 150, 5.50);
+    
+    
+    INSERT INTO Pessoa (Nome, Telefone, Logradouro, Cidade, Estado, Email) VALUES (&#x27;Maria&#x27;, &#x27;2222-2222&#x27;, &#x27;Rua 2, Bairro&#x27;, &#x27;Cidade A&#x27;, &#x27;MG&#x27;, &#x27;maria@exemplo.com&#x27;);
+    INSERT INTO Pessoa (Nome, Telefone, Logradouro, Cidade, Estado, Email) VALUES (&#x27;Pedro&#x27;, &#x27;3333-3333&#x27;, &#x27;Rua 3, Bairro&#x27;, &#x27;Cidade B&#x27;, &#x27;RJ&#x27;, &#x27;pedro@exemplo.com&#x27;);
+    INSERT INTO Pessoa (Nome, Telefone, Logradouro, Cidade, Estado, Email) VALUES (&#x27;João&#x27;, &#x27;3333-3333&#x27;, &#x27;Avenida 5, Centro&#x27;, &#x27;Cidade B&#x27;, &#x27;SP&#x27;, &#x27;joao@exemplo.com&#x27;);
+    INSERT INTO Pessoa (Nome, Telefone, Logradouro, Cidade, Estado, Email) VALUES (&#x27;Ana&#x27;, &#x27;4444-4444&#x27;, &#x27;Rua 7, Bairro Novo&#x27;, &#x27;Cidade C&#x27;, &#x27;RJ&#x27;, &#x27;ana@exemplo.com&#x27;);
+    INSERT INTO Pessoa (Nome, Telefone, Logradouro, Cidade, Estado, Email) VALUES (&#x27;Lucas&#x27;, &#x27;5555-5555&#x27;, &#x27;Rua 10, Vila Feliz&#x27;, &#x27;Cidade D&#x27;, &#x27;RS&#x27;, &#x27;lucas@exemplo.com&#x27;);
+    INSERT INTO Pessoa (Nome, Telefone, Logradouro, Cidade, Estado, Email) VALUES (&#x27;Carla&#x27;, &#x27;6666-6666&#x27;, &#x27;Avenida 12, Loteamento&#x27;, &#x27;Cidade E&#x27;, &#x27;BA&#x27;, &#x27;carla@exemplo.com&#x27;);
+    INSERT INTO Pessoa (Nome, Telefone, Logradouro, Cidade, Estado, Email) VALUES (&#x27;Fernanda&#x27;, &#x27;7777-7777&#x27;, &#x27;Rua 15, Parque&#x27;, &#x27;Cidade F&#x27;, &#x27;PR&#x27;, &#x27;fernanda@exemplo.com&#x27;);
+    INSERT INTO Pessoa (Nome, Telefone, Logradouro, Cidade, Estado, Email) VALUES (&#x27;Rafael&#x27;, &#x27;8888-8888&#x27;, &#x27;Avenida 20, Centro&#x27;, &#x27;Cidade G&#x27;, &#x27;SC&#x27;, &#x27;rafael@exemplo.com&#x27;);
+    INSERT INTO Pessoa (Nome, Telefone, Logradouro, Cidade, Estado, Email) VALUES (&#x27;Mariana&#x27;, &#x27;9999-9999&#x27;, &#x27;Rua 25, Jardim&#x27;, &#x27;Cidade H&#x27;, &#x27;ES&#x27;, &#x27;mariana@exemplo.com&#x27;);
+    INSERT INTO PessoaFisica (ID_Pessoa, CPF) VALUES ((SELECT ID_Pessoa FROM Pessoa WHERE Nome = &#x27;João&#x27;), &#x27;33333333333&#x27;);
+    INSERT INTO PessoaFisica (ID_Pessoa, CPF) VALUES ((SELECT ID_Pessoa FROM Pessoa WHERE Nome = &#x27;Ana&#x27;), &#x27;44444444444&#x27;);
+    INSERT INTO PessoaFisica (ID_Pessoa, CPF) VALUES ((SELECT ID_Pessoa FROM Pessoa WHERE Nome = &#x27;Lucas&#x27;), &#x27;55555555555&#x27;);
+    INSERT INTO PessoaFisica (ID_Pessoa, CPF) VALUES ((SELECT ID_Pessoa FROM Pessoa WHERE Nome = &#x27;Carla&#x27;), &#x27;66666666666&#x27;);
+    INSERT INTO PessoaFisica (ID_Pessoa, CPF) VALUES ((SELECT ID_Pessoa FROM Pessoa WHERE Nome = &#x27;Fernanda&#x27;), &#x27;77777777777&#x27;);
+    INSERT INTO PessoaFisica (ID_Pessoa, CPF) VALUES ((SELECT ID_Pessoa FROM Pessoa WHERE Nome = &#x27;Rafael&#x27;), &#x27;88888888888&#x27;);
+    INSERT INTO PessoaFisica (ID_Pessoa, CPF) VALUES ((SELECT ID_Pessoa FROM Pessoa WHERE Nome = &#x27;Mariana&#x27;), &#x27;99999999999&#x27;);
+    INSERT INTO PessoaFisica (ID_Pessoa, CPF) VALUES ((SELECT ID_Pessoa FROM Pessoa WHERE Nome = &#x27;Pedro&#x27;), &#x27;22222222222&#x27;);
+    INSERT INTO PessoaFisica (ID_Pessoa, CPF) VALUES ((SELECT ID_Pessoa FROM Pessoa WHERE Nome = &#x27;Maria&#x27;), &#x27;22222212222&#x27;);
+    
+    
+    INSERT INTO Pessoa (Nome, Telefone, Logradouro, Cidade, Estado, Email) VALUES (&#x27;Empresa ABC&#x27;, &#x27;3333-3333&#x27;, &#x27;Avenida 5, Centro&#x27;, &#x27;Cidade B&#x27;, &#x27;SP&#x27;, &#x27;empresaabc@exemplo.com&#x27;);
+    INSERT INTO Pessoa (Nome, Telefone, Logradouro, Cidade, Estado, Email) VALUES (&#x27;Corporação XYZ&#x27;, &#x27;4444-4444&#x27;, &#x27;Rua 7, Bairro Novo&#x27;, &#x27;Cidade C&#x27;, &#x27;RJ&#x27;, &#x27;corporacaoxyz@exemplo.com&#x27;);
+    INSERT INTO Pessoa (Nome, Telefone, Logradouro, Cidade, Estado, Email) VALUES (&#x27;Firma Ltda.&#x27;, &#x27;5555-5555&#x27;, &#x27;Rua 10, Vila Feliz&#x27;, &#x27;Cidade D&#x27;, &#x27;RS&#x27;, &#x27;firmaltda@exemplo.com&#x27;);
+    INSERT INTO Pessoa (Nome, Telefone, Logradouro, Cidade, Estado, Email) VALUES (&#x27;Comércio LTDA&#x27;, &#x27;6666-6666&#x27;, &#x27;Avenida 12, Loteamento&#x27;, &#x27;Cidade E&#x27;, &#x27;BA&#x27;, &#x27;comercioltda@exemplo.com&#x27;);
+    INSERT INTO Pessoa (Nome, Telefone, Logradouro, Cidade, Estado, Email) VALUES (&#x27;Incorporadora S/A&#x27;, &#x27;7777-7777&#x27;, &#x27;Rua 15, Parque&#x27;, &#x27;Cidade F&#x27;, &#x27;PR&#x27;, &#x27;incorporadora@exemplo.com&#x27;);
+    INSERT INTO Pessoa (Nome, Telefone, Logradouro, Cidade, Estado, Email) VALUES (&#x27;Consultoria &amp; Cia.&#x27;, &#x27;8888-8888&#x27;, &#x27;Avenida 20, Centro&#x27;, &#x27;Cidade G&#x27;, &#x27;SC&#x27;, &#x27;consultoria@exemplo.com&#x27;);
+    INSERT INTO Pessoa (Nome, Telefone, Logradouro, Cidade, Estado, Email) VALUES (&#x27;Sociedade Ltda.&#x27;, &#x27;9999-9999&#x27;, &#x27;Rua 25, Jardim&#x27;, &#x27;Cidade H&#x27;, &#x27;ES&#x27;, &#x27;sociedade@exemplo.com&#x27;);
+    INSERT INTO PessoaJuridica (ID_Pessoa, CNPJ) VALUES ((SELECT ID_Pessoa FROM Pessoa WHERE Nome = &#x27;Empresa ABC&#x27;), &#x27;11111111111111&#x27;);
+    INSERT INTO PessoaJuridica (ID_Pessoa, CNPJ) VALUES ((SELECT ID_Pessoa FROM Pessoa WHERE Nome = &#x27;Corporação XYZ&#x27;), &#x27;22222221222222&#x27;);
+    INSERT INTO PessoaJuridica (ID_Pessoa, CNPJ) VALUES ((SELECT ID_Pessoa FROM Pessoa WHERE Nome = &#x27;Firma Ltda.&#x27;), &#x27;44444444444444&#x27;);
+    INSERT INTO PessoaJuridica (ID_Pessoa, CNPJ) VALUES ((SELECT ID_Pessoa FROM Pessoa WHERE Nome = &#x27;Comércio LTDA&#x27;), &#x27;55555555555555&#x27;);
+    INSERT INTO PessoaJuridica (ID_Pessoa, CNPJ) VALUES ((SELECT ID_Pessoa FROM Pessoa WHERE Nome = &#x27;Incorporadora S/A&#x27;), &#x27;66666666666666&#x27;);
+    INSERT INTO PessoaJuridica (ID_Pessoa, CNPJ) VALUES ((SELECT ID_Pessoa FROM Pessoa WHERE Nome = &#x27;Consultoria &amp; Cia.&#x27;), &#x27;77777777777777&#x27;);
+    INSERT INTO PessoaJuridica (ID_Pessoa, CNPJ) VALUES ((SELECT ID_Pessoa FROM Pessoa WHERE Nome = &#x27;Sociedade Ltda.&#x27;), &#x27;88888888888888&#x27;);
+    
+    
+    INSERT INTO Movimento (ID_Produto, ID_Usuario, ID_Pessoa, TipoMovimento, Quantidade, PrecoUnitario) VALUES (5, 4, (SELECT ID_Pessoa FROM Pessoa WHERE Nome = &#x27;Maria&#x27;), &#x27;V&#x27;, 30, (SELECT PrecoVenda FROM Produto WHERE ID_Produto = 5));
+    INSERT INTO Movimento (ID_Produto, ID_Usuario, ID_Pessoa, TipoMovimento, Quantidade, PrecoUnitario) VALUES (6, 5, (SELECT ID_Pessoa FROM Pessoa WHERE Nome = &#x27;Pedro&#x27;), &#x27;C&#x27;, 20, (SELECT PrecoVenda FROM Produto WHERE ID_Produto = 6));
+    INSERT INTO Movimento (ID_Produto, ID_Usuario, ID_Pessoa, TipoMovimento, Quantidade, PrecoUnitario) VALUES (7, 6, (SELECT ID_Pessoa FROM Pessoa WHERE Nome = &#x27;Maria&#x27;), &#x27;V&#x27;, 10, (SELECT PrecoVenda FROM Produto WHERE ID_Produto = 7));
+    INSERT INTO Movimento (ID_Produto, ID_Usuario, ID_Pessoa, TipoMovimento, Quantidade, PrecoUnitario) VALUES (8, 7, (SELECT ID_Pessoa FROM Pessoa WHERE Nome = &#x27;João&#x27;), &#x27;V&#x27;, 15, (SELECT PrecoVenda FROM Produto WHERE ID_Produto = 8));
+    INSERT INTO Movimento (ID_Produto, ID_Usuario, ID_Pessoa, TipoMovimento, Quantidade, PrecoUnitario) VALUES (9, 8, (SELECT ID_Pessoa FROM Pessoa WHERE Nome = &#x27;Ana&#x27;), &#x27;V&#x27;, 25, (SELECT PrecoVenda FROM Produto WHERE ID_Produto = 9));
+    INSERT INTO Movimento (ID_Produto, ID_Usuario, ID_Pessoa, TipoMovimento, Quantidade, PrecoUnitario) VALUES (10, 9, (SELECT ID_Pessoa FROM Pessoa WHERE Nome = &#x27;Lucas&#x27;), &#x27;V&#x27;, 5, (SELECT PrecoVenda FROM Produto WHERE ID_Produto = 10));
+    INSERT INTO Movimento (ID_Produto, ID_Usuario, ID_Pessoa, TipoMovimento, Quantidade, PrecoUnitario) VALUES (11, 10, (SELECT ID_Pessoa FROM Pessoa WHERE Nome = &#x27;Carla&#x27;), &#x27;V&#x27;, 18, (SELECT PrecoVenda FROM Produto WHERE ID_Produto = 11));
+    INSERT INTO Movimento (ID_Produto, ID_Usuario, ID_Pessoa, TipoMovimento, Quantidade, PrecoUnitario) VALUES (12, 11, (SELECT ID_Pessoa FROM Pessoa WHERE Nome = &#x27;Fernanda&#x27;), &#x27;V&#x27;, 22, (SELECT PrecoVenda FROM Produto WHERE ID_Produto = 12));
+    INSERT INTO Movimento (ID_Produto, ID_Usuario, ID_Pessoa, TipoMovimento, Quantidade, PrecoUnitario) VALUES (13, 12, (SELECT ID_Pessoa FROM Pessoa WHERE Nome = &#x27;Rafael&#x27;), &#x27;C&#x27;, 8, (SELECT PrecoVenda FROM Produto WHERE ID_Produto = 13));
+    INSERT INTO Movimento (ID_Produto, ID_Usuario, ID_Pessoa, TipoMovimento, Quantidade, PrecoUnitario) VALUES (14, 13, (SELECT ID_Pessoa FROM Pessoa WHERE Nome = &#x27;Mariana&#x27;), &#x27;C&#x27;, 12, (SELECT PrecoVenda FROM Produto WHERE ID_Produto = 14));
+    INSERT INTO Movimento (ID_Produto, ID_Usuario, ID_Pessoa, TipoMovimento, Quantidade, PrecoUnitario) VALUES (15, 14, (SELECT ID_Pessoa FROM Pessoa WHERE Nome = &#x27;Empresa ABC&#x27;), &#x27;C&#x27;, 30, (SELECT PrecoVenda FROM Produto WHERE ID_Produto = 15));
+    INSERT INTO Movimento (ID_Produto, ID_Usuario, ID_Pessoa, TipoMovimento, Quantidade, PrecoUnitario) VALUES (16, 15, (SELECT ID_Pessoa FROM Pessoa WHERE Nome = &#x27;Corporação XYZ&#x27;), &#x27;C&#x27;, 20, (SELECT PrecoVenda FROM Produto WHERE ID_Produto = 16));
+    INSERT INTO Movimento (ID_Produto, ID_Usuario, ID_Pessoa, TipoMovimento, Quantidade, PrecoUnitario) VALUES (17, 16, (SELECT ID_Pessoa FROM Pessoa WHERE Nome = &#x27;Firma Ltda.&#x27;), &#x27;C&#x27;, 25, (SELECT PrecoVenda FROM Produto WHERE ID_Produto = 17));
+    INSERT INTO Movimento (ID_Produto, ID_Usuario, ID_Pessoa, TipoMovimento, Quantidade, PrecoUnitario) VALUES (18, 17, (SELECT ID_Pessoa FROM Pessoa WHERE Nome = &#x27;Consultoria &amp; Cia.&#x27;), &#x27;V&#x27;, 10, (SELECT PrecoVenda FROM Produto WHERE ID_Produto = 18));
+    INSERT INTO Movimento (ID_Produto, ID_Usuario, ID_Pessoa, TipoMovimento, Quantidade, PrecoUnitario) VALUES (19, 18, (SELECT ID_Pessoa FROM Pessoa WHERE Nome = &#x27;Sociedade Ltda.&#x27;), &#x27;V&#x27;, 14, (SELECT PrecoVenda FROM Produto WHERE ID_Produto = 19));
+    INSERT INTO Movimento (ID_Produto, ID_Usuario, ID_Pessoa, TipoMovimento, Quantidade, PrecoUnitario) VALUES (20, 19, (SELECT ID_Pessoa FROM Pessoa WHERE Nome = &#x27;Maria&#x27;), &#x27;V&#x27;, 7, (SELECT PrecoVenda FROM Produto WHERE ID_Produto = 20));
+    INSERT INTO Movimento (ID_Produto, ID_Usuario, ID_Pessoa, TipoMovimento, Quantidade, PrecoUnitario) VALUES (21, 20, (SELECT ID_Pessoa FROM Pessoa WHERE Nome = &#x27;Pedro&#x27;), &#x27;V&#x27;, 18, (SELECT PrecoVenda FROM Produto WHERE ID_Produto = 21));
+    INSERT INTO Movimento (ID_Produto, ID_Usuario, ID_Pessoa, TipoMovimento, Quantidade, PrecoUnitario) VALUES (18, 17, (SELECT ID_Pessoa FROM Pessoa WHERE Nome = &#x27;Consultoria &amp; Cia.&#x27;), &#x27;V&#x27;, 5, (SELECT PrecoVenda FROM Produto WHERE ID_Produto = 18));
+    INSERT INTO Movimento (ID_Produto, ID_Usuario, ID_Pessoa, TipoMovimento, Quantidade, PrecoUnitario) VALUES (19, 18, (SELECT ID_Pessoa FROM Pessoa WHERE Nome = &#x27;Sociedade Ltda.&#x27;), &#x27;V&#x27;, 8, (SELECT PrecoVenda FROM Produto WHERE ID_Produto = 19));
+    INSERT INTO Movimento (ID_Produto, ID_Usuario, ID_Pessoa, TipoMovimento, Quantidade, PrecoUnitario) VALUES (20, 19, (SELECT ID_Pessoa FROM Pessoa WHERE Nome = &#x27;Maria&#x27;), &#x27;V&#x27;, 3, (SELECT PrecoVenda FROM Produto WHERE ID_Produto = 20));
+    INSERT INTO Movimento (ID_Produto, ID_Usuario, ID_Pessoa, TipoMovimento, Quantidade, PrecoUnitario) VALUES (21, 20, (SELECT ID_Pessoa FROM Pessoa WHERE Nome = &#x27;Pedro&#x27;), &#x27;V&#x27;, 10, (SELECT PrecoVenda FROM Produto WHERE ID_Produto = 21));
+    INSERT INTO Movimento (ID_Produto, ID_Usuario, ID_Pessoa, TipoMovimento, Quantidade, PrecoUnitario) VALUES (22, 21, (SELECT ID_Pessoa FROM Pessoa WHERE Nome = &#x27;João&#x27;), &#x27;V&#x27;, 7, (SELECT PrecoVenda FROM Produto WHERE ID_Produto = 22));
+    INSERT INTO Movimento (ID_Produto, ID_Usuario, ID_Pessoa, TipoMovimento, Quantidade, PrecoUnitario) VALUES (13, 22, (SELECT ID_Pessoa FROM Pessoa WHERE Nome = &#x27;Ana&#x27;), &#x27;C&#x27;, 3, (SELECT PrecoVenda FROM Produto WHERE ID_Produto = 13));
+    INSERT INTO Movimento (ID_Produto, ID_Usuario, ID_Pessoa, TipoMovimento, Quantidade, PrecoUnitario) VALUES (14, 23, (SELECT ID_Pessoa FROM Pessoa WHERE Nome = &#x27;Lucas&#x27;), &#x27;C&#x27;, 5, (SELECT PrecoVenda FROM Produto WHERE ID_Produto = 14));
+    INSERT INTO Movimento (ID_Produto, ID_Usuario, ID_Pessoa, TipoMovimento, Quantidade, PrecoUnitario) VALUES (15, 24, (SELECT ID_Pessoa FROM Pessoa WHERE Nome = &#x27;Carla&#x27;), &#x27;C&#x27;, 10, (SELECT PrecoVenda FROM Produto WHERE ID_Produto = 15));
+    INSERT INTO Movimento (ID_Produto, ID_Usuario, ID_Pessoa, TipoMovimento, Quantidade, PrecoUnitario) VALUES (16, 25, (SELECT ID_Pessoa FROM Pessoa WHERE Nome = &#x27;Fernanda&#x27;), &#x27;C&#x27;, 7, (SELECT PrecoVenda FROM Produto WHERE ID_Produto = 16));
+    INSERT INTO Movimento (ID_Produto, ID_Usuario, ID_Pessoa, TipoMovimento, Quantidade, PrecoUnitario) VALUES (17, 26, (SELECT ID_Pessoa FROM Pessoa WHERE Nome = &#x27;Rafael&#x27;), &#x27;C&#x27;, 12, (SELECT PrecoVenda FROM Produto WHERE ID_Produto = 17));
+    INSERT INTO Movimento (ID_Produto, ID_Usuario, ID_Pessoa, TipoMovimento, Quantidade, PrecoUnitario) VALUES (4, 4, (SELECT ID_Pessoa FROM Pessoa WHERE Nome = &#x27;Maria&#x27;), &#x27;V&#x27;, 8, (SELECT PrecoVenda FROM Produto WHERE ID_Produto = 4));
+    INSERT INTO Movimento (ID_Produto, ID_Usuario, ID_Pessoa, TipoMovimento, Quantidade, PrecoUnitario) VALUES (5, 5, (SELECT ID_Pessoa FROM Pessoa WHERE Nome = &#x27;Pedro&#x27;), &#x27;V&#x27;, 12, (SELECT PrecoVenda FROM Produto WHERE ID_Produto = 5));
+    INSERT INTO Movimento (ID_Produto, ID_Usuario, ID_Pessoa, TipoMovimento, Quantidade, PrecoUnitario) VALUES (6, 6, (SELECT ID_Pessoa FROM Pessoa WHERE Nome = &#x27;Maria&#x27;), &#x27;V&#x27;, 6, (SELECT PrecoVenda FROM Produto WHERE ID_Produto = 6));
+    INSERT INTO Movimento (ID_Produto, ID_Usuario, ID_Pessoa, TipoMovimento, Quantidade, PrecoUnitario) VALUES (7, 7, (SELECT ID_Pessoa FROM Pessoa WHERE Nome = &#x27;Pedro&#x27;), &#x27;V&#x27;, 10, (SELECT PrecoVenda FROM Produto WHERE ID_Produto = 7));
+    INSERT INTO Movimento (ID_Produto, ID_Usuario, ID_Pessoa, TipoMovimento, Quantidade, PrecoUnitario) VALUES (8, 8, (SELECT ID_Pessoa FROM Pessoa WHERE Nome = &#x27;Maria&#x27;), &#x27;V&#x27;, 5, (SELECT PrecoVenda FROM Produto WHERE ID_Produto = 8));
+    INSERT INTO Movimento (ID_Produto, ID_Usuario, ID_Pessoa, TipoMovimento, Quantidade, PrecoUnitario) VALUES (9, 9, (SELECT ID_Pessoa FROM Pessoa WHERE Nome = &#x27;Pedro&#x27;), &#x27;C&#x27;, 4, (SELECT PrecoVenda FROM Produto WHERE ID_Produto = 9));
+    INSERT INTO Movimento (ID_Produto, ID_Usuario, ID_Pessoa, TipoMovimento, Quantidade, PrecoUnitario) VALUES (10, 10, (SELECT ID_Pessoa FROM Pessoa WHERE Nome = &#x27;Maria&#x27;), &#x27;C&#x27;, 8, (SELECT PrecoVenda FROM Produto WHERE ID_Produto = 10));
+    INSERT INTO Movimento (ID_Produto, ID_Usuario, ID_Pessoa, TipoMovimento, Quantidade, PrecoUnitario) VALUES (11, 11, (SELECT ID_Pessoa FROM Pessoa WHERE Nome = &#x27;Pedro&#x27;), &#x27;C&#x27;, 6, (SELECT PrecoVenda FROM Produto WHERE ID_Produto = 11));
+    INSERT INTO Movimento (ID_Produto, ID_Usuario, ID_Pessoa, TipoMovimento, Quantidade, PrecoUnitario) VALUES (12, 12, (SELECT ID_Pessoa FROM Pessoa WHERE Nome = &#x27;Maria&#x27;), &#x27;C&#x27;, 9, (SELECT PrecoVenda FROM Produto WHERE ID_Produto = 12));
+    INSERT INTO Movimento (ID_Produto, ID_Usuario, ID_Pessoa, TipoMovimento, Quantidade, PrecoUnitario) VALUES (4, 4, (SELECT ID_Pessoa FROM Pessoa WHERE Nome = &#x27;Pedro&#x27;), &#x27;C&#x27;, 7, (SELECT PrecoVenda FROM Produto WHERE ID_Produto = 4));
+    INSERT INTO Movimento (ID_Produto, ID_Usuario, ID_Pessoa, TipoMovimento, Quantidade, PrecoUnitario) VALUES (9, 9, (SELECT ID_Pessoa FROM Pessoa WHERE Nome = &#x27;Rafael&#x27;), &#x27;C&#x27;, 3, (SELECT PrecoVenda FROM Produto WHERE ID_Produto = 9));
+    INSERT INTO Movimento (ID_Produto, ID_Usuario, ID_Pessoa, TipoMovimento, Quantidade, PrecoUnitario) VALUES (10, 10, (SELECT ID_Pessoa FROM Pessoa WHERE Nome = &#x27;Mariana&#x27;), &#x27;C&#x27;, 8, (SELECT PrecoVenda FROM Produto WHERE ID_Produto = 10));
+    INSERT INTO Movimento (ID_Produto, ID_Usuario, ID_Pessoa, TipoMovimento, Quantidade, PrecoUnitario) VALUES (11, 11, (SELECT ID_Pessoa FROM Pessoa WHERE Nome = &#x27;Empresa ABC&#x27;), &#x27;C&#x27;, 6, (SELECT PrecoVenda FROM Produto WHERE ID_Produto = 11));
+    INSERT INTO Movimento (ID_Produto, ID_Usuario, ID_Pessoa, TipoMovimento, Quantidade, PrecoUnitario) VALUES (12, 12, (SELECT ID_Pessoa FROM Pessoa WHERE Nome = &#x27;Corporação XYZ&#x27;), &#x27;C&#x27;, 9, (SELECT PrecoVenda FROM Produto WHERE ID_Produto = 12));
+    INSERT INTO Movimento (ID_Produto, ID_Usuario, ID_Pessoa, TipoMovimento, Quantidade, PrecoUnitario) VALUES (4, 4, (SELECT ID_Pessoa FROM Pessoa WHERE Nome = &#x27;Firma Ltda.&#x27;), &#x27;C&#x27;, 7, (SELECT PrecoVenda FROM Produto WHERE ID_Produto = 4));
+    INSERT INTO Movimento (ID_Produto, ID_Usuario, ID_Pessoa, TipoMovimento, Quantidade, PrecoUnitario) VALUES (4, 4, (SELECT ID_Pessoa FROM Pessoa WHERE Nome = &#x27;João&#x27;), &#x27;V&#x27;, 6, (SELECT PrecoVenda FROM Produto WHERE ID_Produto = 4));
+    INSERT INTO Movimento (ID_Produto, ID_Usuario, ID_Pessoa, TipoMovimento, Quantidade, PrecoUnitario) VALUES (5, 5, (SELECT ID_Pessoa FROM Pessoa WHERE Nome = &#x27;Ana&#x27;), &#x27;V&#x27;, 9, (SELECT PrecoVenda FROM Produto WHERE ID_Produto = 5));
+    INSERT INTO Movimento (ID_Produto, ID_Usuario, ID_Pessoa, TipoMovimento, Quantidade, PrecoUnitario) VALUES (6, 6, (SELECT ID_Pessoa FROM Pessoa WHERE Nome = &#x27;Lucas&#x27;), &#x27;V&#x27;, 5, (SELECT PrecoVenda FROM Produto WHERE ID_Produto = 6));
+    INSERT INTO Movimento (ID_Produto, ID_Usuario, ID_Pessoa, TipoMovimento, Quantidade, PrecoUnitario) VALUES (7, 7, (SELECT ID_Pessoa FROM Pessoa WHERE Nome = &#x27;Carla&#x27;), &#x27;V&#x27;, 7, (SELECT PrecoVenda FROM Produto WHERE ID_Produto = 7));
+    INSERT INTO Movimento (ID_Produto, ID_Usuario, ID_Pessoa, TipoMovimento, Quantidade, PrecoUnitario) VALUES (8, 8, (SELECT ID_Pessoa FROM Pessoa WHERE Nome = &#x27;Fernanda&#x27;), &#x27;V&#x27;, 4, (SELECT PrecoVenda FROM Produto WHERE ID_Produto = 8));
+    </code></pre></details></li></ul></li></ul><h2 id="7e34cbf3-2b53-4b27-957a-e3ee65c282d3" class="">Consultas</h2><h3 id="d54fd84e-bdfa-4d48-9dd0-c1d19e5e16fb" class=""><strong>Dados Completos de Pessoas Físicas:</strong></h3><ul id="80820aa0-09ec-45d0-94a1-a56ec3693601" class="bulleted-list"><li style="list-style-type:disc">Código:<ul id="419a9e24-5b6e-4f3f-8d59-7f83d76267d7" class="toggle"><li><details ><summary>pessoasFisicasCompletas.sql</summary><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="45d4b4e7-5370-49bd-858d-20981fe9a97a" class="code"><code class="language-SQL" style="white-space:pre-wrap;word-break:break-all">SELECT Pessoa.*, PessoaFisica.CPF 
+    FROM Pessoa
+    INNER JOIN PessoaFisica ON Pessoa.ID_Pessoa = PessoaFisica.ID_Pessoa;</code></pre></details></li></ul></li></ul><ul id="2b1be401-53bf-4a25-b6bd-4b7f00980c95" class="bulleted-list"><li style="list-style-type:disc">Resultado:<ul id="e8109a5c-c528-46b7-8fca-c994151bb5a6" class="toggle"><li><details ><summary>Print</summary><figure id="a14c2f7a-29c1-48e9-8792-68247cb0c244" class="image"><a target="_blank" href="Relatorio/img/Untitled%2012.png"><img style="width:735px" src="Relatorio/img/Untitled%2012.png"/></a></figure></details></li></ul></li></ul><h3 id="3980004b-989e-4f87-b680-c5adc291a5b5" class=""><strong>Dados Completos de Pessoas Jurídicas:</strong></h3><ul id="2340e20a-7258-41ce-8619-bc3bf5ceb6ce" class="bulleted-list"><li style="list-style-type:disc">Código:<ul id="ad88971c-d037-49e0-94b3-977fa6deecbf" class="toggle"><li><details ><summary>pessoasJuridicasCompletas.sql</summary><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="4653df54-8a8d-4405-ad55-5a8367cdc573" class="code"><code class="language-SQL" style="white-space:pre-wrap;word-break:break-all">SELECT Pessoa.*, PessoaJuridica.CNPJ 
+    FROM Pessoa
+    INNER JOIN PessoaJuridica ON Pessoa.ID_Pessoa = PessoaJuridica.ID_Pessoa;
+    </code></pre></details></li></ul></li></ul><ul id="c279830b-bcf1-4a8f-9d43-8f334d1da104" class="bulleted-list"><li style="list-style-type:disc">Resultado:<ul id="9927fb9b-b1ff-47c0-b36b-360a59a937ec" class="toggle"><li><details ><summary>Print</summary><figure id="c3204a04-95f9-4a9e-a713-cacfbb1b9090" class="image"><a target="_blank" href="Relatorio/img/Untitled%2013.png"><img style="width:822px" src="Relatorio/img/Untitled%2013.png"/></a></figure></details></li></ul></li></ul><h3 id="867e34b3-623b-4ba3-b661-b5279b9f9da7" class=""><strong>Movimentações de Entrada (Compra):</strong></h3><ul id="a532d2e6-fe81-4cc9-9154-90621342aa9a" class="bulleted-list"><li style="list-style-type:disc">Código:<ul id="507d6cb8-383b-4fe5-aab5-cfcfca63b58c" class="toggle"><li><details ><summary>movimentacoesEntradaComDetalhes.sql</summary><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="989dd7d4-94b4-4b31-bf25-c91a2ef318c5" class="code"><code class="language-SQL" style="white-space:pre-wrap;word-break:break-all">SELECT Produto.Nome AS Produto, Pessoa.Nome AS Fornecedor, Movimento.Quantidade, 
+           Movimento.PrecoUnitario, (Movimento.Quantidade * Movimento.PrecoUnitario) AS ValorTotal
+    FROM Movimento
+    INNER JOIN Produto ON Movimento.ID_Produto = Produto.ID_Produto
+    INNER JOIN Pessoa ON Movimento.ID_Pessoa = Pessoa.ID_Pessoa
+    WHERE Movimento.TipoMovimento = &#x27;C&#x27;;</code></pre></details></li></ul></li></ul><ul id="a9b7b084-2fa5-4d43-b380-845a83cd6636" class="bulleted-list"><li style="list-style-type:disc">Resultado:<ul id="00c16fa6-f39b-4ea8-9373-d8072d59eaeb" class="toggle"><li><details ><summary>Print</summary><figure id="1e9c96ea-43d5-4f40-885d-b05d4cb18f2e" class="image"><a target="_blank" href="Relatorio/img/Untitled%2014.png"><img style="width:788px" src="Relatorio/img/Untitled%2014.png"/></a></figure></details></li></ul></li></ul><h3 id="95a22349-64b7-41ba-9e3a-e70988835775" class=""><strong>Movimentações de Saída (Venda):</strong></h3><ul id="977c1aea-96b7-400e-8018-29e17a1220f8" class="bulleted-list"><li style="list-style-type:disc">Código:<ul id="12726c5f-5e6c-4b1a-ab98-63fff931f17f" class="toggle"><li><details ><summary>movimentacoesSaidaComDetalhes.sql</summary><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="5fd7d1ed-8dc8-46f0-b2fd-05709c34452f" class="code"><code class="language-SQL" style="white-space:pre-wrap;word-break:break-all">SELECT Produto.Nome AS Produto, Pessoa.Nome AS Comprador, Movimento.Quantidade, 
+           Movimento.PrecoUnitario, (Movimento.Quantidade * Movimento.PrecoUnitario) AS ValorTotal
+    FROM Movimento
+    INNER JOIN Produto ON Movimento.ID_Produto = Produto.ID_Produto
+    INNER JOIN Pessoa ON Movimento.ID_Pessoa = Pessoa.ID_Pessoa
+    WHERE Movimento.TipoMovimento = &#x27;V&#x27;;</code></pre></details></li></ul></li></ul><ul id="3035159d-6e71-49b6-bdc3-e292a490d104" class="bulleted-list"><li style="list-style-type:disc">Resultado:<ul id="ab737ec9-104b-4438-8f73-a9f7d9c1b155" class="toggle"><li><details ><summary>Print</summary><figure id="71e17fb6-6ef0-4c12-b99b-05c89be0654b" class="image"><a target="_blank" href="Relatorio/img/Untitled%2015.png"><img style="width:785px" src="Relatorio/img/Untitled%2015.png"/></a></figure></details></li></ul></li></ul><h3 id="f21c3b76-653a-4a74-915f-d8a93f9ee2f3" class=""><strong>Valor Total das Entradas Agrupadas por Produto:</strong></h3><ul id="ccfb7c37-f5fe-4841-9a9c-f36c7d0a4ee3" class="bulleted-list"><li style="list-style-type:disc">Código:<ul id="36685864-a79c-4e2e-b4df-64823a1b7c22" class="toggle"><li><details ><summary>valorTotalEntradasPorProduto.sql</summary><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="87454ee7-2b99-4787-96d8-2eec600768f1" class="code"><code class="language-SQL" style="white-space:pre-wrap;word-break:break-all">SELECT Produto.Nome, SUM(Movimento.Quantidade * Movimento.PrecoUnitario) AS ValorTotalEntradas
+    FROM Movimento
+    INNER JOIN Produto ON Movimento.ID_Produto = Produto.ID_Produto
+    WHERE Movimento.TipoMovimento = &#x27;C&#x27;
+    GROUP BY Produto.Nome;</code></pre></details></li></ul></li></ul><ul id="734af443-cd9e-4129-a08a-1ca91e56bd33" class="bulleted-list"><li style="list-style-type:disc">Resultado:<ul id="cc412579-c504-49da-aedd-946c44deda6e" class="toggle"><li><details ><summary>Print</summary><figure id="308c7a9a-ceaa-40f1-a2e2-1133e194fc0d" class="image"><a target="_blank" href="Relatorio/img/Untitled%2016.png"><img style="width:785px" src="Relatorio/img/Untitled%2016.png"/></a></figure></details></li></ul></li></ul><h3 id="4094cb71-9b3c-4ac0-aea9-577860d01d64" class=""><strong>Valor Total das Saídas Agrupadas por Produto:</strong></h3><ul id="334a7317-4a65-4e51-9fa0-dbd68a3dbfc8" class="bulleted-list"><li style="list-style-type:disc">Código:<ul id="a94b8ac2-67d9-4520-9a13-21eceb3a3b84" class="toggle"><li><details ><summary>valorTotalSaidasPorProduto.sql</summary><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="54fcdc91-0179-4eaa-894e-47ef45e86604" class="code"><code class="language-SQL" style="white-space:pre-wrap;word-break:break-all">SELECT Produto.Nome, SUM(Movimento.Quantidade * Movimento.PrecoUnitario) AS ValorTotalSaidas
+    FROM Movimento
+    INNER JOIN Produto ON Movimento.ID_Produto = Produto.ID_Produto
+    WHERE Movimento.TipoMovimento = &#x27;V&#x27;
+    GROUP BY Produto.Nome;
+    </code></pre></details></li></ul></li></ul><ul id="8a14f586-c570-496f-a614-918336d834c0" class="bulleted-list"><li style="list-style-type:disc">Resultado:<ul id="e14f69c2-b0b5-45b9-8aac-30f1ea684835" class="toggle"><li><details ><summary>Print</summary><figure id="5e6a0e28-f591-4407-a03a-e69415a75a72" class="image"><a target="_blank" href="Relatorio/img/Untitled%2017.png"><img style="width:624px" src="Relatorio/img/Untitled%2017.png"/></a></figure></details></li></ul></li></ul><h3 id="6f0b9ea9-b360-4f12-b8be-b9c147f56fc3" class=""><strong>Operadores que Não Efetuaram Movimentações de Entrada (Compra):</strong></h3><ul id="3616284a-e8b8-4472-bd72-fff2e07d66df" class="bulleted-list"><li style="list-style-type:disc">Código:<ul id="2820f5e1-8bcd-4aaa-acc2-c77bdee17777" class="toggle"><li><details ><summary>operadoresSemMovimentacoesEntrada.sql</summary><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="a6987a5d-7ac8-4eac-bc4c-0c90644b5855" class="code"><code class="language-SQL" style="white-space:pre-wrap;word-break:break-all">SELECT Usuario.*
+    FROM Usuario
+    LEFT JOIN Movimento ON Usuario.ID_Usuario = Movimento.ID_Usuario AND Movimento.TipoMovimento = &#x27;C&#x27;
+    WHERE Movimento.ID_Movimento IS NULL;
+    </code></pre></details></li></ul></li></ul><ul id="70ec8783-f7dd-4d1f-b1fa-c0699b881235" class="bulleted-list"><li style="list-style-type:disc">Resultado:<ul id="4442d2d2-fa78-471d-b774-56f57523ea6b" class="toggle"><li><details ><summary>Print</summary><figure id="060ab781-6321-4e9e-a15d-472c81f0fab0" class="image"><a target="_blank" href="Relatorio/img/Untitled%2018.png"><img style="width:819px" src="Relatorio/img/Untitled%2018.png"/></a></figure></details></li></ul></li></ul><h3 id="95958b89-d5b3-4327-9277-4dad15dfdbb0" class=""><strong>Valor Total de Entrada, Agrupado por Operador:</strong></h3><ul id="75719ed6-7e37-404c-a6d0-ca3e6b4efe6d" class="bulleted-list"><li style="list-style-type:disc">Código:<ul id="6799d9d8-b3ad-4d1f-a243-12279c0ab8d8" class="toggle"><li><details ><summary>valorTotalEntradaPorOperador.sql</summary><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="3ecf7c12-39c1-4bb0-9658-535b5b3e10d2" class="code"><code class="language-SQL" style="white-space:pre-wrap;word-break:break-all">SELECT Usuario.Login, SUM(Movimento.Quantidade * Movimento.PrecoUnitario) AS ValorTotalEntrada
+    FROM Movimento
+    INNER JOIN Usuario ON Movimento.ID_Usuario = Usuario.ID_Usuario
+    WHERE Movimento.TipoMovimento = &#x27;C&#x27;
+    GROUP BY Usuario.Login;
+    </code></pre></details></li></ul></li></ul><ul id="a6eef0da-846e-407e-bf8f-d7dddb54e0a3" class="bulleted-list"><li style="list-style-type:disc">Resultado:<ul id="df5ce6aa-98e0-4303-8ae6-3ed40444f584" class="toggle"><li><details ><summary>Print</summary><figure id="d596997a-16aa-4715-b245-2b27658d6533" class="image"><a target="_blank" href="Relatorio/img/Untitled%2019.png"><img style="width:802px" src="Relatorio/img/Untitled%2019.png"/></a></figure></details></li></ul></li></ul><h3 id="38a623e5-5e84-4243-981c-104365c32c86" class=""><strong>Valor Total de Saída, Agrupado por Operador:</strong></h3><ul id="59f670dd-e645-4780-b321-d4257a00c913" class="bulleted-list"><li style="list-style-type:disc">Código:<ul id="e91c116f-3c03-41cb-8ac7-595899098734" class="toggle"><li><details ><summary>valorTotalSaidaPorOperador.sql</summary><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="b8d4c627-84c0-4526-9bf5-a4255754f335" class="code"><code class="language-SQL" style="white-space:pre-wrap;word-break:break-all">SELECT Usuario.Login, SUM(Movimento.Quantidade * Movimento.PrecoUnitario) AS ValorTotalSaida
+    FROM Movimento
+    INNER JOIN Usuario ON Movimento.ID_Usuario = Usuario.ID_Usuario
+    WHERE Movimento.TipoMovimento = &#x27;V&#x27;
+    GROUP BY Usuario.Login;
+    </code></pre></details></li></ul></li></ul><ul id="90bbcd2f-71f7-4d9a-8791-7764c72f315b" class="bulleted-list"><li style="list-style-type:disc">Resultado:<ul id="7fa82e28-8d07-409b-940d-657edfa25f8f" class="toggle"><li><details ><summary>Print</summary><figure id="b5d85619-6b94-4ebb-a9a2-b9d873e18451" class="image"><a target="_blank" href="Relatorio/img/Untitled%2020.png"><img style="width:624px" src="Relatorio/img/Untitled%2020.png"/></a></figure></details></li></ul></li></ul><h3 id="8d9f27e8-4666-4110-a469-223258b0a22a" class=""><strong>Valor Médio de Venda por Produto, Utilizando Média Ponderada:</strong></h3><ul id="d2107e47-1c4d-419f-bf94-94f393453a1c" class="bulleted-list"><li style="list-style-type:disc">Observação: Como o valor do produto é constante, o resultado será o valor do produto. Portanto, optei por realizar uma consulta alternativa abaixo: &quot;<em>Quantidade média de produto por venda, utilizando média ponderada.</em>&quot;</li></ul><ul id="a8a37a9b-f0be-4806-9bbb-6665ce7c658d" class="bulleted-list"><li style="list-style-type:disc">Código:<ul id="70b7ef19-b6a7-400d-a83b-efa0b096c492" class="toggle"><li><details ><summary>precoMedioVendaPonderadoPorProduto.sql</summary><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="58160dbd-5066-486e-a56a-4c2ca70bc995" class="code"><code class="language-SQL" style="white-space:pre-wrap;word-break:break-all">SELECT Produto.Nome, SUM(Movimento.Quantidade * Movimento.PrecoUnitario) / SUM(Movimento.Quantidade) AS PrecoMedioVenda
+    FROM Movimento
+    INNER JOIN Produto ON Movimento.ID_Produto = Produto.ID_Produto
+    WHERE Movimento.TipoMovimento = &#x27;V&#x27;
+    GROUP BY Produto.Nome;
+    </code></pre></details></li></ul></li></ul><ul id="0dc20fe6-b4b3-4472-9101-646295e77d1f" class="bulleted-list"><li style="list-style-type:disc">Resultado:<ul id="05590631-6489-4026-b001-c4c7f5fccea2" class="toggle"><li><details ><summary>Print</summary><figure id="3b578222-4d74-426f-9bf0-821ac4c1b912" class="image"><a target="_blank" href="Relatorio/img/Untitled%2021.png"><img style="width:814px" src="Relatorio/img/Untitled%2021.png"/></a></figure></details></li></ul></li></ul><h3 id="653e96f1-cd67-4d77-9543-bfeecb289959" class=""><strong>Média de Quantidade em Venda por Produto:</strong></h3><ul id="8204e41e-0ce6-43e9-8f10-ebe3f8986537" class="bulleted-list"><li style="list-style-type:disc">Código:<ul id="60ebc81b-da6b-4c9f-bb6f-4789df0cea3b" class="toggle"><li><details ><summary>mediaQntdMovimentoPorProduto.sql</summary><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="c8803394-402d-4041-86d1-3b60606feeed" class="code"><code class="language-SQL" style="white-space:pre-wrap;word-break:break-all">SELECT Produto.Nome, 
+    SUM(Movimento.Quantidade)/ Count(Movimento.ID_produto) as &quot;Média de Quantidade Por Movimento&quot;
+    FROM Movimento
+    INNER JOIN Produto ON Movimento.ID_Produto = Produto.ID_Produto
+    GROUP BY Produto.Nome
+    </code></pre></details></li></ul></li></ul><ul id="c18acdf3-6cbc-4072-821f-059e9e4d1e33" class="bulleted-list"><li style="list-style-type:disc">Resultado:<ul id="15af5426-941f-4e6c-a8f8-072cfe41ec1d" class="toggle"><li><details ><summary>Print</summary><figure id="fc345193-2e3f-4428-941d-c54b437d5d83" class="image"><a target="_blank" href="Relatorio/img/Untitled%2022.png"><img style="width:624px" src="Relatorio/img/Untitled%2022.png"/></a></figure></details></li></ul></li></ul><h2 id="2c5a7b7f-1253-4df5-b7d9-86d56b699626" class="">Análise e Conclusão:</h2><h3 id="4c5686e7-7f6f-4d33-8fdb-4c3335d50d87" class="">“Quais as diferenças no uso de sequence e identity?”</h3><ul id="7793a629-5d18-4114-81eb-bc42bf609140" class="bulleted-list"><li style="list-style-type:disc"><strong>Sequence:</strong> Gera números sequenciais, mas não está vinculada a uma tabela específica. Pode ser usada em várias tabelas ou até mesmo fora delas.</li></ul><ul id="aee7c395-4eb2-4cd9-a29e-e586bb3daea7" class="bulleted-list"><li style="list-style-type:disc"><strong>Identity:</strong> Vinculada a uma coluna específica de uma tabela. Gera automaticamente valores únicos para essa coluna quando novos registros são inseridos.</li></ul><h3 id="e4a3450b-ab08-4c94-8393-9152d7c78588" class="">“Qual a importância das chaves estrangerias para a consistência do banco?”</h3><p id="6ed8d5b0-f086-417d-9447-6163d102552a" class="">Garante a consistência dos dados entre tabelas, evitando a criação de registros órfãos (sem correspondência na tabela relacionada). Basicamente, mantém tudo organizado e conectado.</p><h3 id="0907b575-e876-4aad-813e-c029572bb972" class="">“Quais operadores do SQL pertencem à álgebra relacional e quais são definidos no cálculo relacional?”</h3><ul id="c5dde2ec-2154-4b9d-9c68-cbdd456a4d76" class="bulleted-list"><li style="list-style-type:disc"><strong>Álgebra Relacional:</strong> SELECT (com restrições), PROJECT, UNION, INTERSECT, EXCEPT, JOIN, RENAME.</li></ul><ul id="f7f4965f-8a9e-47d8-8ab6-2ce133b697be" class="bulleted-list"><li style="list-style-type:disc"><strong>Cálculo Relacional:</strong> Operadores lógicos como AND, OR, NOT.</li></ul><h3 id="d6d1ec73-4d83-48d5-92dd-b2185f807b50" class="">“Como é feito o agrupamento em consultas, e qual requisito é<br/>obrigatório?”<br/></h3><p id="c7ec2a59-a7c2-42d2-99fe-066202161a8d" class="">Usado para agrupar linhas com valores iguais em certas colunas. O comando GROUP BY é usado para isso.</p><p id="964ae75a-8d37-40aa-9b7a-e49a7bbd93ae" class=""><strong>Requisito obrigatório:</strong> A cláusula SELECT deve incluir apenas colunas que estão sendo agrupadas ou funções de agregação (como SUM, AVG, etc.).</p><p id="f859a2ef-e0b4-4a9f-a096-81d250b095a9" class="">
+    </p></details></li></ul></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>
